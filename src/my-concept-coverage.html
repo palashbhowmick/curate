@@ -14,569 +14,562 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="styling-elements/class-elements.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
-<link rel="import" href="../bower_components/mdb-metric-display/mdb-metric-display.html">
-<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import"
+	href="../bower_components/mdb-metric-display/mdb-metric-display.html">
+<link rel="import"
+	href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../bower_components/mdb-dimension-finder/mdb-dimension-finder.html">
-<link rel="import" href="../bower_components/mdb-simple-list/mdb-simple-list.html">
-<link rel="import" href="../bower_components/mdb-recommended-concepts/mdb-concept-recommendation.html">
-<link rel="import" href="../bower_components/mdb-recommended-concepts/mdb-recommended-concepts.html">
-<link rel="import" href="../bower_components/mdb-coverage-table/mdb-coverage-table.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+	href="../bower_components/mdb-dimension-finder/mdb-dimension-finder.html">
+<link rel="import"
+	href="../bower_components/mdb-simple-list/mdb-simple-list.html">
+<link rel="import"
+	href="../bower_components/mdb-recommended-concepts/mdb-concept-recommendation.html">
+<link rel="import"
+	href="../bower_components/mdb-recommended-concepts/mdb-recommended-concepts.html">
+<link rel="import"
+	href="../bower_components/mdb-coverage-table/mdb-coverage-table.html">
+<link rel="import"
+	href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
-<dom-module id="concept-coverage">
-  <template>
-    <style include="class-elements iron-flex iron-flex-alignment"></style>
-    <style include="shared-styles">
-       :host {
-        display: block;
-        font-size: 11px;
-        height: 100%;
-        --standard-padding: 30px;
-        --mdb-recommended-concepts-property-name: {
-          color: #aaa;
-        }
-        --stat-value: {
-          font-size: 3em;
-          font-weight: lighter;
-        }
-        --stat-description: {
-          font-size: 1.5em;
-          font-weight: 100;
-          margin: 0;
-          color: #afafaf;
-        }
-      }
 
-      [slot='body'] {
-        background: #fff;
-      }
+<link rel="import" href="gid-api.html">
 
-       :host paper-tabs {
-        padding-top: var(--standard-padding, 20px);
-      }
-      /* styles for paper-tabs*/
+<dom-module id="concept-coverage"> <template>
+<style include="class-elements iron-flex iron-flex-alignment"></style>
+<style include="shared-styles">
+:host {
+	display: block;
+	font-size: 11px;
+	height: 100%; -
+	-standard-padding: 30px; -
+	-mdb-recommended-concepts-property-name: { color : #aaa;
+}
 
-      paper-tab {
-        color: #5da9dd;
-        --paper-tab-content-unselected: {
-          color: #b3b3b3;
-        }
-        --layout-flex-auto: {
-          -ms-flex: initial;
-          -webkit-flex: initial;
-          flex: initial;
-        }
-      }
+-
+-stat-value: {
+	font-size: 3em;
+	font-weight: lighter;
+}
 
-      paper-tabs {
-        --paper-tabs-selection-bar-color: #5da9dd
-      }
-      /*Styling for concept list*/
+-
+-stat-description: {
+	font-size: 1.5em;
+	font-weight: 100;
+	margin: 0;
+	color: #afafaf;
+}
 
-       :host .concept-list {
-        --mdb-simple-list-empty: {
-          border: 1px solid #ddd;
-          padding: var(--standard-padding, 20px);
-          margin-top: 0;
-        }
-        --mdb-simple-list: {
-          border: 1px solid #e1e6ed;
-          background: #fcfdff;
-          height: var(--concept-list-height, 180px);
-          padding-top: var(--standard-padding, 20px);
-          padding-bottom: var(--standard-padding, 20px);
-          color: #484848;
-          position: relative;
-          width: 100%;
-        }
-        --mdb-list-item: {
-          min-height: 15px;
-          height: auto;
-          padding-bottom: 0;
-          padding-top: 0;
-          margin-left: var(--standard-padding, 20px);
-          margin-top: 0.4em;
-          font-weight: 400;
-          font-size: 1.2em;
-          float: left;
-          width: 18%;
-        }
-        --mdb-list-item-focused: {
-          border-radius: 25px;
-        }
-        --mdb-list-item-selected: {
-          border-radius: 25px;
-          color: #fff;
-          background-color: #5caadb;
-        }
-      }
-      /* Dimension finder */
+}
+[slot='body'] {
+	background: #fff;
+}
 
-       :host paper-item .icon {
-        display: inline-block;
-        width: 1.5em;
-      }
+:host paper-tabs {
+	padding-top: var(- -standard-padding, 20px);
+}
+/* styles for paper-tabs*/
+paper-tab {
+	color: #5da9dd; -
+	-paper-tab-content-unselected: { color : #b3b3b3;
+}
 
-       :host paper-item iron-icon.arrow {
-        display: none;
-      }
+-
+-layout-flex-auto: {
+	-ms-flex: initial;
+	-webkit-flex: initial;
+	flex: initial;
+}
 
-       :host paper-item .recommendation {
-        display: inline-block;
-        position: absolute;
-        right: 30px;
-        top: 50%;
-        transform: translate(0, -50%);
-      }
+}
+paper-tabs { -
+	-paper-tabs-selection-bar-color: #5da9dd
+}
+/*Styling for concept list*/
+:host .concept-list { -
+	-mdb-simple-list-empty: { border : 1px solid #ddd;
+	padding: var(- -standard-padding, 20px);
+	margin-top: 0;
+}
 
-       :host paper-item[aria-selected="true"] iron-icon.arrow {
-        display: inline-block;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(0, -50%);
-      }
+-
+-mdb-simple-list: {
+	border: 1px solid #e1e6ed;
+	background: #fcfdff;
+	height: var(- -concept-list-height, 180px);
+	padding-top: var(- -standard-padding, 20px);
+	padding-bottom: var(- -standard-padding, 20px);
+	color: #484848;
+	position: relative;
+	width: 100%;
+}
 
-       :host mdb-dimension-finder {
-        font-size: 1em;
-        --mdb-title: {
-          font-size: 1.5em;
-          color: #adadad;
-        }
-        --mdb-dimension-finder-header-container: {
-          margin-bottom: 20px;
-        }
-        --mdb-dimension-finder-list: {
-          height: 168px;
-          overflow: auto;
-        }
-        --mdb-dimension-finder-list-item: {
-          min-height: 25px;
-          height: auto;
-          padding-top: 0;
-          padding-bottom: 0;
-          line-height: initial;
-          padding-left: 20px;
-        }
-      }
+-
+-mdb-list-item: {
+	min-height: 15px;
+	height: auto;
+	padding-bottom: 0;
+	padding-top: 0;
+	margin-left: var(- -standard-padding, 20px);
+	margin-top: 0.4em;
+	font-weight: 400;
+	font-size: 1.2em;
+	float: left;
+	width: 18%;
+}
 
-       :host .db-entities {
-        border: 1px solid #e3eaee;
-        overflow-y: auto;
-        overflow-x: hidden;
-        margin-top: var(--standard-padding, 20px);
-        padding-bottom: var(--standard-padding, 20px);
-        padding-top: var(--standard-padding, 20px);
-      }
+-
+-mdb-list-item-focused: {
+	border-radius: 25px;
+}
 
-       :host .db-entities mdb-dimension-finder {
-        margin-left: var(--standard-padding, 20px);
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 14px;
-          padding-right: 14px;
-        }
-        --mdb-dimension-finder-searchbox-container: {
-          padding: 20px;
-        }
-        --mdb-dimension-finder-searchbox: {
-          padding-left: 10px;
-          width: 93%;
-        }
-      }
+-
+-mdb-list-item-selected: {
+	border-radius: 25px;
+	color: #fff;
+	background-color: #5caadb;
+}
 
-       :host .db-entities .item-name {
-        max-width: 199px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      
-      :host[w-1024] .db-entities {
-        margin-top: 20px;
-        padding-bottom: 20px;
-        padding-top: 20px;
-      }
+}
+/* Dimension finder */
+:host paper-item .icon {
+	display: inline-block;
+	width: 1.5em;
+}
 
-       :host[w-1024] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 10px;
-          padding-right: 10px;
-        }
-      }
+:host paper-item iron-icon.arrow {
+	display: none;
+}
 
-       :host[w-1280] .db-entities {
-        margin-top: 20px;
-        padding-bottom: 20px;
-        padding-top: 20px;
-      }
+:host paper-item .recommendation {
+	display: inline-block;
+	position: absolute;
+	right: 30px;
+	top: 50%;
+	transform: translate(0, -50%);
+}
 
-       :host[w-1280] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 14px;
-          padding-right: 14px;
-        }
-      }
+:host paper-item[aria-selected="true"] iron-icon.arrow {
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translate(0, -50%);
+}
 
-       :host[w-1360] .db-entities {
-        margin-top: 20px;
-        padding-bottom: 20px;
-        padding-top: 20px;
-      }
+:host mdb-dimension-finder {
+	font-size: 1em; -
+	-mdb-title: { font-size : 1.5em;
+	color: #adadad;
+}
 
-       :host[w-1360] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 19px;
-          padding-right: 19px;
-        }
-      }
+-
+-mdb-dimension-finder-header-container: {
+	margin-bottom: 20px;
+}
 
-       :host[w-1366] .db-entities {
-        margin-top: 20px;
-        padding-bottom: 20px;
-        padding-top: 20px;
-      }
+-
+-mdb-dimension-finder-list: {
+	height: 168px;
+	overflow: auto;
+}
 
-       :host[w-1366] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 18px;
-          padding-right: 18px;
-        }
-      }
+-
+-mdb-dimension-finder-list-item: {
+	min-height: 25px;
+	height: auto;
+	padding-top: 0;
+	padding-bottom: 0;
+	line-height: initial;
+	padding-left: 20px;
+}
 
-       :host[w-1440] .db-entities {
-        margin-top: 20px;
-        padding-bottom: 20px;
-        padding-top: 20px;
-      }
+}
+:host .db-entities {
+	border: 1px solid #e3eaee;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-top: var(- -standard-padding, 20px);
+	padding-bottom: var(- -standard-padding, 20px);
+	padding-top: var(- -standard-padding, 20px);
+}
 
-       :host[w-1440] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 8px;
-          padding-right: 8px;
-        }
-      }
+:host .db-entities mdb-dimension-finder {
+	margin-left: var(- -standard-padding, 20px);
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 14px;
+	padding-right: 14px;
+}
 
-       :host[w-1600] .db-entities {
-        margin-top: 30px;
-        padding-bottom: 30px;
-        padding-top: 30px;
-      }
+-
+-mdb-dimension-finder-searchbox-container: {
+	padding: 20px;
+}
 
-       :host[w-1600] .db-entities mdb-dimension-finder {
-        margin-left: 30px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 15px;
-          padding-right: 15px;
-        }
-      }
+-
+-mdb-dimension-finder-searchbox: {
+	padding-left: 10px;
+	width: 93%;
+}
 
-       :host[w-1680] .db-entities {
-        margin-top: 30px;
-        padding-bottom: 30px;
-        padding-top: 30px;
-      }
+}
+:host .db-entities .item-name {
+	max-width: 199px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
-       :host[w-1680] .db-entities mdb-dimension-finder {
-        margin-left: 30px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
+:host[w-1024] .db-entities {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
 
-       :host[w-1920] .db-entities {
-        margin-top: 30px;
-        padding-bottom: 30px;
-        padding-top: 30px;
-      }
+:host[w-1024] .db-entities mdb-dimension-finder {
+	margin-left: 20px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 10px;
+	padding-right: 10px;
+}
 
-       :host[w-1920] .db-entities mdb-dimension-finder {
-        margin-left: 30px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 35px;
-          padding-right: 35px;
-        }
-      }
+}
+:host[w-1280] .db-entities {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
 
-       :host[w-2560] .db-entities {
-        margin-top: 30px;
-        padding-bottom: 30px;
-        padding-top: 30px;
-      }
+:host[w-1280] .db-entities mdb-dimension-finder {
+	margin-left: 20px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 14px;
+	padding-right: 14px;
+}
 
-       :host[w-2560] .db-entities mdb-dimension-finder {
-        margin-left: 30px;
-        float: left;
-        --mdb-dimension-finder-radio-button: {
-          padding-left: 75px;
-          padding-right: 75px;
-        }
-      }
+}
+:host[w-1360] .db-entities {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
 
-       :host mdb-dimension-finder iron-icon {
-        width: 15px;
-        height: 15px;
-      }
+:host[w-1360] .db-entities mdb-dimension-finder {
+	margin-left: 20px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 19px;
+	padding-right: 19px;
+}
 
-       :host .face {
-        padding-right: 3px;
-      }
-      /*Recommended Concepts*/
+}
+:host[w-1366] .db-entities {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
 
-       :host mdb-recommended-concepts {
-        --mdb-recommended-concepts-title: {
-          color: #aaa;
-          display: block;
-        }
-        --mdb-search-box: {
-          font-size: 1em;
-          padding-left: 10px;
-        }
-      }
+:host[w-1366] .db-entities mdb-dimension-finder {
+	margin-left: 20px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 18px;
+	padding-right: 18px;
+}
 
-       :host mdb-concept-recommendation {
-        margin-top: var(--standard-padding, 20px);
-        margin-bottom: var(--standard-padding, 20px);
-        border: 1px solid #e5edee;
-        background-color: #fcfdff;
-      }
+}
+:host[w-1440] .db-entities {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
 
-       :host .concept-identified {
-        text-align: center;
-        font-size: 1.6em;
-        --iron-icon-width: 40px;
-        --iron-icon-height: 40px;
-      }
+:host[w-1440] .db-entities mdb-dimension-finder {
+	margin-left: 20px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 8px;
+	padding-right: 8px;
+}
 
-       :host .concept-identified iron-icon {
-        font-size: 2em;
-        background-color: #5bca52;
-        color: #fff;
-        border-radius: 50%;
-        --iron-icon-width: 55px;
-        --iron-icon-height: 55px;
-      }
+}
+:host[w-1600] .db-entities {
+	margin-top: 30px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
 
-       :host .concept-identification {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-justify-content: space-between;
-        justify-content: space-between;
-      }
+:host[w-1600] .db-entities mdb-dimension-finder {
+	margin-left: 30px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 15px;
+	padding-right: 15px;
+}
 
-       :host .concept-identified .success-message {
-        color: #aaa;
-      }
+}
+:host[w-1680] .db-entities {
+	margin-top: 30px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
 
-       :host .concept-identified .success-message mdb-title {
-        color: #000;
-        display: block;
-        --mdb-title: {
-          margin: 0;
-          display: block;
-        }
-      }
+:host[w-1680] .db-entities mdb-dimension-finder {
+	margin-left: 30px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 20px;
+	padding-right: 20px;
+}
 
-       :host .concept-identified .success-message p {
-        margin: 0;
-      }
+}
+:host[w-1920] .db-entities {
+	margin-top: 30px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
 
-       :host mdb-coverage-table {
-        width: 60%;
-        margin-right: var(--standard-padding, 20px);
-        margin-top: var(--standard-padding, 20px);
-        --mdb-coverage-table: {
-          height: 511px;
-        }
-        --mdb-coverage-table-title: {
-          color: #aaa;
-          margin-top: 0;
-          margin-bottom: 20px;
-        }
-        --mdb-coverage-table-options: {
-          color: #aaa;
-        }
-        --mdb-coverage-table-radio-list: {
-          font-size: 0.9em;
-          padding-left: 10px;
-        }
-        --mdb-coverage-table-cell: {
-          height: 18px;
-          padding: 14px;
-        }
-        --mdb-coverage-table-body-cell: {
-          color: #aaa;
-        }
-      }
+:host[w-1920] .db-entities mdb-dimension-finder {
+	margin-left: 30px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 35px;
+	padding-right: 35px;
+}
 
-       :host .recommended-concepts {
-        padding-top: 44px;
-        display: inline-block;
-        width: 40%;
-      }
-    </style>
+}
+:host[w-2560] .db-entities {
+	margin-top: 30px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
 
-    <page-layout heading="Concept Coverage" help-text="Concept Coverage">
-      <div slot="body">
-        <mdb-metric-display-container>
-          <mdb-metric-display stat-value="0.2%" stat-description="Coverage across 1 application"></mdb-metric-display>
-          <mdb-metric-display stat-value="279 days" stat-description="ETA (based on yesterday)"></mdb-metric-display>
-          <mdb-metric-display stat-value="25" stat-description="Confirmed Columns"></mdb-metric-display>
-        </mdb-metric-display-container>
+:host[w-2560] .db-entities mdb-dimension-finder {
+	margin-left: 30px;
+	float: left; -
+	-mdb-dimension-finder-radio-button: { padding-left : 75px;
+	padding-right: 75px;
+}
 
-        <!-- LOBs -->
-        <paper-tabs selected="{{_selectedTab}}">
-          <template is="dom-repeat" items="{{lobs}}">
-            <paper-tab>{{item}}</paper-tab>
-          </template>
-        </paper-tabs>
-        <template is="dom-if" if="{{lobs.length}}">
-          <!-- List of concetps -->
-          <mdb-simple-list class="concept-list" items={{concepts}} selected-item="{{selectedConcept}}">
-            <template>
-              <paper-item>{{this}}</paper-item>
-            </template>
-          </mdb-simple-list>
+}
+:host mdb-dimension-finder iron-icon {
+	width: 15px;
+	height: 15px;
+}
 
-          <div class="db-entities">
-            <!-- Applications -->
+:host .face {
+	padding-right: 3px;
+}
+/*Recommended Concepts*/
+:host mdb-recommended-concepts { -
+	-mdb-recommended-concepts-title: { color : #aaa;
+	display: block;
+}
 
-            <mdb-dimension-finder class="applications" dimension="Application" items="{{applications}}" help-text="List of Applications"
-              selected-dimension="{{selectedApplication}}">
-              <template>
-                <paper-item>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
+-
+-mdb-search-box: {
+	font-size: 1em;
+	padding-left: 10px;
+}
 
-            <!-- Databases -->
+}
+:host mdb-concept-recommendation {
+	margin-top: var(- -standard-padding, 20px);
+	margin-bottom: var(- -standard-padding, 20px);
+	border: 1px solid #e5edee;
+	background-color: #fcfdff;
+}
 
-            <mdb-dimension-finder class="databases" all-dimensions-allowed dimension="Database" items="{{databases}}" help-text="List of Databases"
-              selected-dimension="{{selectedDatabase}}">
-              <template>
-                <paper-item>
-                  <span class="bulb icon">
-                      <template is="dom-if" if="{{item.systemRecommended}}">
-                          <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon>
-                      </template>
-                  </span>
-                  <span class="face icon">
-                      <template is="dom-if" if="{{item.humanVerified}}">
-                          <iron-icon icon="icons:face"></iron-icon>
-                      </template>
-                  </span>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
-                  <template is="dom-if" if="{{item.recommendation}}">
-                    <span class="recommendation">{{item.recommendation}}%</span>
-                  </template>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
+:host .concept-identified {
+	text-align: center;
+	font-size: 1.6em; -
+	-iron-icon-width: 40px; -
+	-iron-icon-height: 40px;
+}
 
-            <!-- Schemas -->
-            <mdb-dimension-finder class="schemas" all-dimensions-allowed dimension="Schema" items="{{schemas}}" help-text="List of Schemas"
-              selected-dimension="{{selectedSchema}}">
-              <template>
-                <paper-item>
-                  <span class="bulb icon">
-                      <template is="dom-if" if="{{item.systemRecommended}}">
-                          <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon>
-                      </template>                            
-                  </span>
-                  <span class="face icon">
-                      <template is="dom-if" if="{{item.humanVerified}}">
-                          <iron-icon icon="icons:face"></iron-icon>
-                      </template>
-                  </span>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
-                  <template is="dom-if" if="{{item.recommendation}}">
-                    <span class="recommendation">{{item.recommendation}}%</span>
-                  </template>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
+:host .concept-identified iron-icon {
+	font-size: 2em;
+	background-color: #5bca52;
+	color: #fff;
+	border-radius: 50%; -
+	-iron-icon-width: 55px; -
+	-iron-icon-height: 55px;
+}
 
-            <!-- Tables -->
+:host .concept-identification {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+}
 
-            <mdb-dimension-finder class="tables" all-dimensions-allowed dimension="Table" items="{{tables}}" help-text="List of Tables"
-              selected-dimension="{{selectedTable}}">
-              <template>
-                <paper-item>
-                  <span class="bulb icon">
-                      <template is="dom-if" if="{{item.systemRecommended}}">
-                          <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon>
-                      </template>                            
-                  </span>
-                  <span class="face icon">
-                      <template is="dom-if" if="{{item.humanVerified}}">
-                          <iron-icon icon="icons:face"></iron-icon>
-                      </template>
-                  </span>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
-                  <template is="dom-if" if="{{item.recommendation}}">
-                    <span class="recommendation">{{item.recommendation}}%</span>
-                  </template>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
+:host .concept-identified .success-message {
+	color: #aaa;
+}
 
-          </div>
+:host .concept-identified .success-message mdb-title {
+	color: #000;
+	display: block; -
+	-mdb-title: { margin : 0;
+	display: block;
+}
 
-          <!-- Table data -->
-          <template is="dom-if" if="{{tableColumns.length}}">
-            <div class="concept-identification">
-              <mdb-coverage-table selected-column="{{selectedColumn}}" title-text="{{selectedTable.name}}" help-text="Coverage table" columns="{{tableColumns}}"
-                items="{{tableData}}"></mdb-coverage-table>
+}
+:host .concept-identified .success-message p {
+	margin: 0;
+}
 
-              <!-- Recommended concepts -->
-              <div class="recommended-concepts">
-                <mdb-concept-recommendation property="{{selectedConcept}}" recommendation-factor="0"></mdb-concept-recommendation>
-                <template is="dom-if" if="{{isConceptIdentified}}">
-                  <div class="concept-identified">
-                    <div class="success-message">
-                      <iron-icon class="arrow" icon="icons:done"></iron-icon>
-                      <mdb-title>Hurray!</mdb-title>
-                      <p>Thanks for identifying {{selectedColumn}} as {{identifiedConcept}}.</p>
-                      <p>You've helped make data better.</p>
-                    </div>
-                  </div>
-                </template>
-                <template is="dom-if" if="{{!isConceptIdentified}}">
-                  <mdb-recommended-concepts recommendations="{{recommendedConcepts}}"></mdb-recommended-concepts>
-                </template>
-              </div>
-            </div>
-          </template>
-        </template>
+:host mdb-coverage-table {
+	width: 60%;
+	margin-right: var(- -standard-padding, 20px);
+	margin-top: var(- -standard-padding, 20px); -
+	-mdb-coverage-table: { height : 511px;
+}
 
-      </div>
-    </page-layout>
-  </template>
+-
+-mdb-coverage-table-title: {
+	color: #aaa;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
 
-  <script>
+-
+-mdb-coverage-table-options: {
+	color: #aaa;
+}
+
+-
+-mdb-coverage-table-radio-list: {
+	font-size: 0.9em;
+	padding-left: 10px;
+}
+
+-
+-mdb-coverage-table-cell: {
+	height: 18px;
+	padding: 14px;
+}
+
+-
+-mdb-coverage-table-body-cell: {
+	color: #aaa;
+}
+
+}
+:host .recommended-concepts {
+	padding-top: 44px;
+	display: inline-block;
+	width: 40%;
+}
+</style>
+
+<page-layout heading="Concept Coverage" help-text="Concept Coverage">
+<div slot="body">
+	<mdb-metric-display-container> <mdb-metric-display
+		stat-value="0.2%" stat-description="Coverage across 1 application"></mdb-metric-display>
+	<mdb-metric-display stat-value="279 days"
+		stat-description="ETA (based on yesterday)"></mdb-metric-display> <mdb-metric-display
+		stat-value="25" stat-description="Confirmed Columns"></mdb-metric-display>
+	</mdb-metric-display-container>
+
+	<!-- LOBs -->
+	<paper-tabs selected="{{_selectedTab}}"> <template
+		is="dom-repeat" items="{{lobs}}"> <paper-tab>{{item}}</paper-tab>
+	</template> </paper-tabs>
+	<template is="dom-if" if="{{lobs.length}}"> <!-- List of concetps -->
+	<mdb-simple-list class="concept-list" items={{concepts}}
+		selected-item="{{selectedConcept}}"> <template>
+	<paper-item>{{this}}</paper-item> </template> </mdb-simple-list> <gid-api auto=false
+		http-method="get" api-url={{domainUrl}} response='{{domainResponse}}'
+		api-timeout={{domainTimeout}}> </gid-api>
+
+	<div class="db-entities">
+		<!-- Applications -->
+
+		<mdb-dimension-finder class="applications" dimension="Application"
+			items="{{applications}}" help-text="List of Applications"
+			selected-dimension="{{selectedApplication}}">
+		<template> <paper-item> <span
+			class="item-name" title="{{item.name}}">{{item.name}}</span> <iron-icon
+			class="arrow" icon="icons:chevron-right"></iron-icon> </paper-item> </template> </mdb-dimension-finder>
+
+		<!-- Databases -->
+
+		<mdb-dimension-finder class="databases" all-dimensions-allowed
+			dimension="Database" items="{{databases}}"
+			help-text="List of Databases"
+			selected-dimension="{{selectedDatabase}}"> <template>
+		<paper-item> <span class="bulb icon"> <template
+				is="dom-if" if="{{item.systemRecommended}}"> <iron-icon
+				icon="icons:lightbulb-outline" item-icon></iron-icon> </template>
+		</span> <span class="face icon"> <template is="dom-if"
+				if="{{item.humanVerified}}"> <iron-icon icon="icons:face"></iron-icon>
+			</template>
+		</span> <span class="item-name" title="{{item.name}}">{{item.name}}</span> <template
+			is="dom-if" if="{{item.recommendation}}"> <span
+			class="recommendation">{{item.recommendation}}%</span> </template> <iron-icon
+			class="arrow" icon="icons:chevron-right"></iron-icon> </paper-item> </template> </mdb-dimension-finder>
+
+		<!-- Schemas -->
+		<mdb-dimension-finder class="schemas" all-dimensions-allowed
+			dimension="Schema" items="{{schemas}}" help-text="List of Schemas"
+			selected-dimension="{{selectedSchema}}"> <template>
+		<paper-item> <span class="bulb icon"> <template
+				is="dom-if" if="{{item.systemRecommended}}"> <iron-icon
+				icon="icons:lightbulb-outline" item-icon></iron-icon> </template>
+		</span> <span class="face icon"> <template is="dom-if"
+				if="{{item.humanVerified}}"> <iron-icon icon="icons:face"></iron-icon>
+			</template>
+		</span> <span class="item-name" title="{{item.name}}">{{item.name}}</span> <template
+			is="dom-if" if="{{item.recommendation}}"> <span
+			class="recommendation">{{item.recommendation}}%</span> </template> <iron-icon
+			class="arrow" icon="icons:chevron-right"></iron-icon> </paper-item> </template> </mdb-dimension-finder>
+
+		<!-- Tables -->
+
+		<mdb-dimension-finder class="tables" all-dimensions-allowed
+			dimension="Table" items="{{tables}}" help-text="List of Tables"
+			selected-dimension="{{selectedTable}}"> <template>
+		<paper-item> <span class="bulb icon"> <template
+				is="dom-if" if="{{item.systemRecommended}}"> <iron-icon
+				icon="icons:lightbulb-outline" item-icon></iron-icon> </template>
+		</span> <span class="face icon"> <template is="dom-if"
+				if="{{item.humanVerified}}"> <iron-icon icon="icons:face"></iron-icon>
+			</template>
+		</span> <span class="item-name" title="{{item.name}}">{{item.name}}</span> <template
+			is="dom-if" if="{{item.recommendation}}"> <span
+			class="recommendation">{{item.recommendation}}%</span> </template> <iron-icon
+			class="arrow" icon="icons:chevron-right"></iron-icon> </paper-item> </template> </mdb-dimension-finder>
+
+	</div>
+
+	<!-- Table data --> <template is="dom-if" if="{{tableColumns.length}}">
+	<div class="concept-identification">
+		<mdb-coverage-table selected-column="{{selectedColumn}}"
+			title-text="{{selectedTable.name}}" help-text="Coverage table"
+			columns="{{tableColumns}}" items="{{tableData}}"></mdb-coverage-table>
+
+		<!-- Recommended concepts -->
+		<div class="recommended-concepts">
+			<mdb-concept-recommendation property="{{selectedConcept}}"
+				recommendation-factor="0"></mdb-concept-recommendation>
+			<template is="dom-if" if="{{isConceptIdentified}}">
+			<div class="concept-identified">
+				<div class="success-message">
+					<iron-icon class="arrow" icon="icons:done"></iron-icon>
+					<mdb-title>Hurray!</mdb-title>
+					<p>Thanks for identifying {{selectedColumn}} as
+						{{identifiedConcept}}.</p>
+					<p>You've helped make data better.</p>
+				</div>
+			</div>
+			</template>
+			<template is="dom-if" if="{{!isConceptIdentified}}"> <mdb-recommended-concepts
+				recommendations="{{recommendedConcepts}}"></mdb-recommended-concepts>
+			</template>
+		</div>
+	</div>
+	</template> </template>
+
+</div>
+</page-layout> </template> <script>
     Polymer({
       is: 'concept-coverage',
 
@@ -706,8 +699,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: false,
           notify: true
         },
-
-        identifiedConcept: String
+ 	   domainUrl:{
+      	 	type: String,
+  	        notify: true
+  	 	},
+  	   domainTimeout : {
+      		type: Number,
+  	        notify: true,
+  	        value : 0
+  	   },
+  	  domainResponse : {
+		type : Object,
+		notify : true,
+		observer : 'domainResponseChanged'
+	  },
+	   identifiedConcept: String
       },
 
       ready: function () {
@@ -745,7 +751,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _tabChanged: function () {
         this._setSelectedLob();
       },
-
+		
       _lobChanged: function () {
         var that = this;
         that.set('concepts', []);
@@ -765,27 +771,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           this.isConceptIdentified = false;
           this.identifiedConcept = '';
+		  this.domainUrl = "/src/assets/domains.json";
+		  this.domainTimeout = this.domainTimeout - 1;
+//           this._dataSource.getLOBConcepts(this.selectedLob)
+//             .then(function (concepts) {
+//               var row_height = 30;
+//               var max_item_count = 24,
+//                 extra_rows = concepts.length - max_item_count > 0 ? Math.ceil((concepts.length - max_item_count) / 4) : 0,
+//                 list = that.querySelector('mdb-simple-list.concept-list');
 
-          this._dataSource.getLOBConcepts(this.selectedLob)
-            .then(function (concepts) {
-              var row_height = 30;
-              var max_item_count = 24,
-                extra_rows = concepts.length - max_item_count > 0 ? Math.ceil((concepts.length - max_item_count) / 4) : 0,
-                list = that.querySelector('mdb-simple-list.concept-list');
+//               if (extra_rows > 0) {
+//                 list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
+//               } else {
+//                 delete list.customStyle['--concept-list-height'];
+//               }
 
-              if (extra_rows > 0) {
-                list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
-              } else {
-                delete list.customStyle['--concept-list-height'];
-              }
-
-              that.set('concepts', concepts);
-              list.emptyMessage = !concepts.length ? 'No concepts found for selected LOB.' : '';
-              list.updateStyles();
-            });
+//               that.set('concepts', concepts);
+//               list.emptyMessage = !concepts.length ? 'No concepts found for selected LOB.' : '';
+//               list.updateStyles();
+//             });
         }
       },
+      domainResponseChanged : function(newvalue, oldvalue){
+       var row_height = 30;
+       var max_item_count = 24,
+         extra_rows = newvalue.domains.length - max_item_count > 0 ? Math.ceil((newvalue.domains.length - max_item_count) / 4) : 0,
+         list = this.querySelector('mdb-simple-list.concept-list');
 
+       if (extra_rows > 0) {
+         list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
+       } else {
+         delete list.customStyle['--concept-list-height'];
+       }
+
+       list.updateStyles();
+          this.async(function() {
+      		this.concepts =  this.concepts.concat(newvalue.domains);
+		 	          }, 500);
+      	
+      },
       _conceptChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.applications');
         this.set('applications', []);
@@ -879,5 +903,4 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (component) component.emptyMessage = '';
       }
     });
-  </script>
-</dom-module>
+  </script> </dom-module>
