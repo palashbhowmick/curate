@@ -793,6 +793,7 @@ paper-tabs { -
         }
       },
       domainResponseChanged : function(newvalue, oldvalue){
+       this.concepts = [];
        var row_height = 30;
        var max_item_count = 24,
          extra_rows = newvalue.domains.length - max_item_count > 0 ? Math.ceil((newvalue.domains.length - max_item_count) / 4) : 0,
