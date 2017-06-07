@@ -434,7 +434,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 40%;
       }
     </style>
-
+	
+	<!--  rest api handling -->
+	
+	   <!-- domains -->	
+		<gid-api auto=false
+			http-method="get" api-url={{domainUrl}} response='{{domainResponse}}'
+			api-timeout={{domainTimeout}} api-params={{domainParams}}> </gid-api>			
+	    <!-- domains -->
+	    
+	    <!-- applications -->	    
+	    <gid-api auto=false
+			http-method="get" api-url={{applicationUrl}} response='{{applicationResponse}}'
+			api-timeout={{applicationTimeout}} api-params={{applicationParams}}> </gid-api>
+	    <!-- applications -->
+	    
+	    <!--  databases -->
+	    <gid-api auto=false
+			http-method="get" api-url={{databaseUrl}} response='{{databaseResponse}}'
+			api-timeout={{databaseTimeout}} api-params={{databaseParams}}> </gid-api>
+	    <!--  databases -->
+	    
+	    <!-- schemas  -->
+	    <gid-api auto=false
+			http-method="get" api-url={{schemaUrl}} response='{{schemaResponse}}'
+			api-timeout={{schemaTimeout}} api-params={{schemaParams}}> </gid-api>
+		<!-- schemas  -->
+		
+		<!-- tables  -->
+	    <gid-api auto=false
+			http-method="get" api-url={{tableUrl}} response='{{tableResponse}}'
+			api-timeout={{tableTimeout}} api-params={{tableParams}}> </gid-api>
+		<!-- tables  -->
+		
+	<!--  rest api handling -->
+	
     <page-layout heading="Concept Coverage" help-text="Concept Coverage">
       <div slot="body">
         <mdb-metric-display-container>
@@ -451,13 +485,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-tabs>
         <template is="dom-if" if="{{lobs.length}}">
         
-          <gid-api auto=false
-		http-method="get" api-url={{domainUrl}} response='{{domainResponse}}'
-		api-timeout={{domainTimeout}}> </gid-api>
+          
           <!-- List of concetps -->
           <mdb-simple-list class="concept-list" items={{concepts}} selected-item="{{selectedConcept}}">
             <template>
-              <paper-item>{{this}}</paper-item>
+              <paper-item>{{item.label}}</paper-item>
             </template>
           </mdb-simple-list>
 
@@ -468,7 +500,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               selected-dimension="{{selectedApplication}}">
               <template>
                 <paper-item>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
+                  <span class="item-name" title="{{item.name}}">{{item.application}}</span>
                   <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
                 </paper-item>
               </template>
@@ -490,7 +522,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           <iron-icon icon="icons:face"></iron-icon>
                       </template>
                   </span>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
+                  <span class="item-name" title="{{item.connection}}">{{item.connection}}</span>
                   <template is="dom-if" if="{{item.recommendation}}">
                     <span class="recommendation">{{item.recommendation}}%</span>
                   </template>
@@ -514,7 +546,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           <iron-icon icon="icons:face"></iron-icon>
                       </template>
                   </span>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
+                  <span class="item-name" title="{{item.schema}}">{{item.schema}}</span>
                   <template is="dom-if" if="{{item.recommendation}}">
                     <span class="recommendation">{{item.recommendation}}%</span>
                   </template>
@@ -539,7 +571,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           <iron-icon icon="icons:face"></iron-icon>
                       </template>
                   </span>
-                  <span class="item-name" title="{{item.name}}">{{item.name}}</span>
+                  <span class="item-name" title="{{item.table}}">{{item.table}}</span>
                   <template is="dom-if" if="{{item.recommendation}}">
                     <span class="recommendation">{{item.recommendation}}%</span>
                   </template>
@@ -712,19 +744,95 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true
         },
         domainUrl:{
-            type: String,
-      	        notify: true
-      	 	},
-      	   domainTimeout : {
-          		type: Number,
-      	        notify: true,
-      	        value : 0
-      	   },
-      	  domainResponse : {
-    		type : Object,
-    		notify : true,
-    		observer : 'domainResponseChanged'
-    	  },
+         type: String,
+   	        notify: true
+   	 	},
+   	   domainTimeout : {
+       		type: Number,
+   	        notify: true,
+   	        value : 0
+   	   },
+   	  domainResponse : {
+  		type : Object,
+  		notify : true,
+  		observer : 'domainResponseChanged'
+   	  },
+   	  domainParams : {
+   		  type: String,
+   		  notify : true
+   	  },
+   	 applicationUrl:{
+        type: String,
+  	        notify: true
+  	 	},
+  	 	applicationTimeout : {
+      		type: Number,
+  	        notify: true,
+  	        value : 0
+  	   },
+  	 applicationResponse : {
+ 		type : Object,
+ 		notify : true,
+ 		observer : 'applicationResponseChanged'
+  	  },
+  	applicationParams : {
+  		  type: String,
+  		  notify : true
+  	  },
+  	databaseUrl:{
+        type: String,
+  	        notify: true
+  	 	},
+  	 	databaseTimeout : {
+      		type: Number,
+  	        notify: true,
+  	        value : 0
+  	   },
+  	 databaseResponse : {
+ 		type : Object,
+ 		notify : true,
+ 		observer : 'databaseResponseChanged'
+  	  },
+  	databaseParams : {
+  		  type: String,
+  		  notify : true
+  	  },
+  	schemaUrl:{
+        type: String,
+  	        notify: true
+  	 	},
+ 	schemaTimeout : {
+   		type: Number,
+        notify: true,
+        value : 0
+   },
+  	 schemaResponse : {
+ 		type : Object,
+ 		notify : true,
+ 		observer : 'schemaResponseChanged'
+  	  },
+  	schemaParams : {
+  		  type: String,
+  		  notify : true
+  	  },
+  	tableUrl:{
+        type: String,
+  	        notify: true
+  	 	},
+ 	tableTimeout : {
+   		type: Number,
+        notify: true,
+        value : 0
+   },
+  	 tableResponse : {
+ 		type : Object,
+ 		notify : true,
+ 		observer : 'tableResponseChanged'
+  	  },
+  	tableParams : {
+  		  type: String,
+  		  notify : true
+  	  },
         identifiedConcept: String
       },
 
@@ -783,60 +891,57 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           this.isConceptIdentified = false;
           this.identifiedConcept = '';
-          this.domainUrl = "/src/assets/domains.json";
+          this.domainUrl = "http://192.168.22.120:45450/api/v1/domains";
+          this.domainParams =  JSON.stringify({
+        	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+        	  "limit":10, 
+        	  "offset":0});
 		  this.domainTimeout = this.domainTimeout - 1;
-
-//           this._dataSource.getLOBConcepts(this.selectedLob)
-//             .then(function (concepts) {
-//               var row_height = 30;
-//               var max_item_count = 24,
-//                 extra_rows = concepts.length - max_item_count > 0 ? Math.ceil((concepts.length - max_item_count) / 4) : 0,
-//                 list = that.querySelector('mdb-simple-list.concept-list');
-
-//               if (extra_rows > 0) {
-//                 list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
-//               } else {
-//                 delete list.customStyle['--concept-list-height'];
-//               }
-
-//               that.set('concepts', concepts);
-//               list.emptyMessage = !concepts.length ? 'No concepts found for selected LOB.' : '';
-//               list.updateStyles();
-//             });
         }
       },
       domainResponseChanged : function(newvalue, oldvalue){
           this.concepts = [];
-          var row_height = 30;
-          var max_item_count = 24,
-            extra_rows = newvalue.domains.length - max_item_count > 0 ? Math.ceil((newvalue.domains.length - max_item_count) / 4) : 0,
-            list = this.querySelector('mdb-simple-list.concept-list');
-          if (extra_rows > 0) {
-            list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
-          } else {
-            delete list.customStyle['--concept-list-height'];
+          if(newvalue != null){
+	          var row_height = 30;
+	          var max_item_count = 24,
+	            extra_rows = newvalue.domains.length - max_item_count > 0 ? Math.ceil((newvalue.domains.length - max_item_count) / 4) : 0,
+	            list = this.querySelector('mdb-simple-list.concept-list');
+	          if (extra_rows > 0) {
+	            list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
+	          } else {
+	            delete list.customStyle['--concept-list-height'];
+	          }
+	          list.updateStyles();
+	             this.async(function() {
+	         		this.concepts =  this.concepts.concat(newvalue.domains);
+	   		 	          }, 500);
+	             list.emptyMessage = !this.concepts.length ? 'No concepts found for selected LOB.' : '';
+	             list.updateStyles();
           }
-          list.updateStyles();
-             this.async(function() {
-         		this.concepts =  this.concepts.concat(newvalue.domains);
-   		 	          }, 500);
-             list.emptyMessage = !concepts.length ? 'No concepts found for selected LOB.' : '';
-             list.updateStyles();
          	
          },
       _conceptChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.applications');
         this.set('applications', []);
-
-        if (this.selectedConcept) {
-          var that = this;
-          //Get applications for the selected concept
-          this._dataSource.getConceptApplications(this.selectedLob, this.selectedConcept)
-            .then(function (applications) {
-              that.set('applications', applications);
-              that.querySelector('mdb-dimension-finder.applications').emptyMessage = applications.length === 0 ? 'No applications found for the selected concept.' : '';
-            });
+        if(this.selectedConcept){
+	        this.applicationUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id + "/applications";
+	        this.applicationParams =  JSON.stringify({
+	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "limit":10, 
+	      	  "offset":0});
+			  this.applicationTimeout = this.applicationTimeout - 1;
         }
+      },
+      
+      applicationResponseChanged: function(newvalue, oldvalue){
+    	  this.applications = [];
+    	  if(newvalue != null){
+    		  this.async(function() {
+    	       		this.applications =  this.applications.concat(newvalue.applications);
+    	 		 	          }, 500);
+    	    	  this.querySelector('mdb-dimension-finder.applications').emptyMessage = this.applications.length === 0 ? 'No applications found for the selected concept.' : '';
+    	  }
+    	  
       },
 
       _applicationChanged: function () {
@@ -844,43 +949,71 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('databases', []);
 
         if (this.selectedApplication) {
-          var that = this;
-          this._dataSource.getApplicationDBs(this.selectedLob, this.selectedConcept, this.selectedApplication)
-            .then(function (dbs) {
-              that.set('databases', dbs);
-              that.querySelector('mdb-dimension-finder.databases').emptyMessage = dbs.length === 0 ? 'No databases found for the selected application.' : '';
-            });
+        	this.databaseUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases";
+	        this.databaseParams =  JSON.stringify({
+	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "limit":10, 
+	      	  "offset":0});
+			  this.databaseTimeout = this.databaseTimeout - 1;
         }
       },
-
+      databaseResponseChanged: function(newvalue, oldvalue){
+    	  this.databases = [];
+    	  if(newvalue != null){
+    		  this.async(function() {
+    	       		this.databases =  this.databases.concat(newvalue.databases);
+    	 		 	          }, 500);
+    	    	  this.querySelector('mdb-dimension-finder.databases').emptyMessage = this.databases.length === 0 ? 'No databases found for the selected application.' : '';
+    	  }
+      },
       _databaseChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.schemas');
         this.set('schemas', []);
 
         if (this.selectedDatabase) {
-          var that = this;
-          this._dataSource.getDBSchemas(this.selectedLob, this.selectedConcept, this.selectedApplication, this.selectedDatabase)
-            .then(function (schemas) {
-              that.set('schemas', schemas);
-              that.querySelector('mdb-dimension-finder.schemas').emptyMessage = schemas.length === 0 ? 'No schemas found for the selected database.' : '';
-            });
+        	this.schemaUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases/" + this.selectedDatabase.id + "/schemas";
+	        this.schemaParams =  JSON.stringify({
+	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "limit":10, 
+	      	  "offset":0});
+			  this.schemaTimeout = this.schemaTimeout - 1;
         }
       },
-
+      schemaResponseChanged: function(newvalue, oldvalue){
+    	  this.schemas = [];
+    	  if(newvalue != null){
+    		  this.async(function() {
+    	       		this.schemas =  this.schemas.concat(newvalue.schemas);
+    	 		 	          }, 500);
+    		  this.querySelector('mdb-dimension-finder.schemas').emptyMessage = this.schemas.length === 0 ? 'No schemas found for the selected database.' : '';
+    	  }
+      },
       _schemaChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.tables');
         this.set('tables', []);
 
         if (this.selectedSchema) {
-          var that = this;
-          this._dataSource.getSchemaTables(this.selectedLob, this.selectedConcept, this.selectedApplication, this.selectedDatabase, this.selectedSchema)
-            .then(function (tables) {
-              that.set('tables', tables);
-              that.querySelector('mdb-dimension-finder.tables').emptyMessage = tables.length === 0 ? 'No tables found for the selected schema.' : '';
-            });
+        	this.tableUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id +
+        					"/applications/" + this.selectedApplication.id +
+        					"/databases/"+ this.selectedDatabase.id + 
+        					"/schemas/"+ this.selectedSchema.id +
+        					"/tables";
+	        this.tableParams =  JSON.stringify({
+	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "limit":10, 
+	      	  "offset":0});
+			  this.tableTimeout = this.schemaTimeout - 1;
         }
       },
-
+      tableResponseChanged: function(newvalue, oldvalue){
+    	  this.tables = [];
+    	  if(newvalue != null){
+    		  this.async(function() {
+    	       		this.tables =  this.tables.concat(newvalue.tables);
+    	 		 	          }, 500);
+    		  this.querySelector('mdb-dimension-finder.tables').emptyMessage = this.tables.length === 0 ? 'No tables found for the selected schema.' : '';
+    	  }
+      },
       _tableChanged: function () {
         this.set('tableColumns', []);
         this.set('tableData', []);
