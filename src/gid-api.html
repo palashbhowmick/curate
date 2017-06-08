@@ -24,7 +24,7 @@
   <script>
     (function() {
      'use strict';
-     var resourceBundle;
+     var configObj;
       Polymer({
         is:'gid-api',
         properties:{
@@ -61,15 +61,14 @@
        		}
         },
         created:function(){
-        //	resourceBundle = Polymer.globalsManager.get('resourceBundle');
+        	configObj = Polymer.globalsManager.get('configObj');
         },
         _processParams: function(apiParams){
         	return JSON.parse(apiParams);
         },
         _processHeaders: function(){
         	var headerObj = {
-//         			"authorization": resourceBundle.apiKey
-        			"authorization": 'jdchsjdhjh'
+        			"authorization": configObj.accessToken
 
         	}
         	return headerObj;

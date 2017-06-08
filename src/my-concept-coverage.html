@@ -614,6 +614,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
+    var configObj;
     Polymer({
       is: 'concept-coverage',
 
@@ -846,7 +847,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         //save reference of data adapter so that it can be used later on
         this._set_dataSource(source);
       },
-
+      created:function(){
+      	configObj = Polymer.globalsManager.get('configObj');
+      },
       attached: function () {
         var that = this;
         this._dataSource.getLOBs()
@@ -891,9 +894,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           this.isConceptIdentified = false;
           this.identifiedConcept = '';
-          this.domainUrl = "http://192.168.22.120:45450/api/v1/domains";
+          this.domainUrl = configObj.gdprHost + "api/v1/domains";
           this.domainParams =  JSON.stringify({
-        	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+        	  "token" : configObj.accessToken,
         	  "limit":10, 
         	  "offset":0});
 		  this.domainTimeout = this.domainTimeout - 1;
@@ -924,9 +927,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._resetEmptyMessage('mdb-dimension-finder.applications');
         this.set('applications', []);
         if(this.selectedConcept){
-	        this.applicationUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id + "/applications";
+	        this.applicationUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications";
 	        this.applicationParams =  JSON.stringify({
-	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
 			  this.applicationTimeout = this.applicationTimeout - 1;
@@ -949,9 +952,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('databases', []);
 
         if (this.selectedApplication) {
-        	this.databaseUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases";
+        	this.databaseUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases";
 	        this.databaseParams =  JSON.stringify({
-	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
 			  this.databaseTimeout = this.databaseTimeout - 1;
@@ -971,9 +974,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('schemas', []);
 
         if (this.selectedDatabase) {
-        	this.schemaUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases/" + this.selectedDatabase.id + "/schemas";
+        	this.schemaUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases/" + this.selectedDatabase.id + "/schemas";
 	        this.schemaParams =  JSON.stringify({
-	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
 			  this.schemaTimeout = this.schemaTimeout - 1;
@@ -993,13 +996,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('tables', []);
 
         if (this.selectedSchema) {
-        	this.tableUrl = "http://192.168.22.120:45450/api/v1/domains/" + this.selectedConcept.id +
+        	this.tableUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id +
         					"/applications/" + this.selectedApplication.id +
         					"/databases/"+ this.selectedDatabase.id + 
         					"/schemas/"+ this.selectedSchema.id +
         					"/tables";
 	        this.tableParams =  JSON.stringify({
-	      	  "token" : 'MTAwNzg5OTYxMTQ5NjgyMTcyMjEyNDA5MDFY',
+	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
 			  this.tableTimeout = this.schemaTimeout - 1;

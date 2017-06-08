@@ -28,6 +28,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="my-icons.html">
 <link rel="import" href="my-header.html">
 <link rel="import" href="mdb-gsheet-data-adapter.html">
+<script src="../bower_components/polymer-global-variables/dist/polymer-global-variables.js" charset="utf-8"></script>
 
 <dom-module id="my-app">
   <template>
@@ -85,7 +86,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 100%;
       }
     </style>
-
+    
+    <iron-ajax
+	            auto
+	            url="assets/config.json"
+	            handle-as="json"
+	            on-response="_handleResponse"
+	            debounce-duration="300">
+            	</iron-ajax>
+    
     <iron-media-query query="(min-width: 1024px) and (max-width: 1279px)" query-matches="{{w-1024}}" on-query-matches-changed="_updateStyles"></iron-media-query>
     <iron-media-query query="(min-width: 1280px) and (max-width: 1359px)" query-matches="{{w-1280}}" on-query-matches-changed="_updateStyles"></iron-media-query>
     <iron-media-query query="(min-width: 1360px) and (max-width: 1365px)" query-matches="{{w-1360}}" on-query-matches-changed="_updateStyles"></iron-media-query>
@@ -153,6 +162,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           reflectToAttribute: true,
           observer: '_pageChanged',
         },
+         configObj : {
+        	type : Object,
+      		notify : true
+        }
       },
 
       observers: [
@@ -181,6 +194,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       _updateStyles: function () {
         Polymer.updateStyles();
+      },
+      _handleResponse: function (event){
+    	  Polymer.globalsManager.set('configObj', event.detail.response);
       }
     });
   </script>
