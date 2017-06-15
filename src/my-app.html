@@ -27,7 +27,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="my-icons.html">
 <link rel="import" href="my-header.html">
-<link rel="import" href="mdb-gsheet-data-adapter.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<!-- <link rel="import" href="mdb-gsheet-data-adapter.html"> -->
 <script src="../bower_components/polymer-global-variables/dist/polymer-global-variables.js" charset="utf-8"></script>
 
 <dom-module id="my-app">
@@ -89,7 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
     <iron-ajax
 	            auto
-	            url="assets/config.json"
+	            url="/src/assets/config.json"
 	            handle-as="json"
 	            on-response="_handleResponse"
 	            debounce-duration="300">
@@ -142,9 +143,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <iron-pages id="pages" selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
           <my-view1 name="view1"></my-view1>
-          <concept-coverage name="concept-coverage" data-source="mdb-gsheet-data-adapter" data-source-options='{"key":"1ytcM-WdkP4orU4HdwpgX62MQELCdhWlbaTci-IZhmsQ"}'
-            w-1024$="[[w-1024]]" w-1280$="[[w-1280]]" w-1360$="[[w-1360]]" w-1366$="[[w-1366]]" w-1440$="[[w-1440]]" w-1600$="[[w-1600]]" w-1680$="[[w-1680]]"
-            w-1920$="[[w-1920]]" w-2560$="[[w-2560]]"></concept-coverage>
+<!--           <concept-coverage name="concept-coverage" data-source="mdb-gsheet-data-adapter" data-source-options='{"key":"1ytcM-WdkP4orU4HdwpgX62MQELCdhWlbaTci-IZhmsQ"}' -->
+<!--             w-1024$="[[w-1024]]" w-1280$="[[w-1280]]" w-1360$="[[w-1360]]" w-1366$="[[w-1366]]" w-1440$="[[w-1440]]" w-1600$="[[w-1600]]" w-1680$="[[w-1680]]" -->
+<!--             w-1920$="[[w-1920]]" w-2560$="[[w-2560]]"></concept-coverage> -->
+          <concept-coverage name="concept-coverage" 
+          w-1024$="[[w-1024]]" w-1280$="[[w-1280]]" w-1360$="[[w-1360]]" w-1366$="[[w-1366]]" w-1440$="[[w-1440]]" w-1600$="[[w-1600]]" w-1680$="[[w-1680]]"
+          w-1920$="[[w-1920]]" w-2560$="[[w-2560]]"></concept-coverage>
           <my-view3 name="view3"></my-view3>
           <my-view404 name="view404"></my-view404>
         </iron-pages>

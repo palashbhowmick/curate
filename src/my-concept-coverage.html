@@ -437,6 +437,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	
 	<!--  rest api handling -->
 	
+		<!-- lobs -->	
+		<gid-api auto=false
+			http-method="get" api-url={{lobsUrl}} response='{{lobsResponse}}'
+			api-timeout={{lobsTimeout}} api-params={{lobsParams}}> </gid-api>			
+	    <!-- lobs -->
+	
 	   <!-- domains -->	
 		<gid-api auto=false
 			http-method="get" api-url={{domainUrl}} response='{{domainResponse}}'
@@ -466,6 +472,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			http-method="get" api-url={{tableUrl}} response='{{tableResponse}}'
 			api-timeout={{tableTimeout}} api-params={{tableParams}}> </gid-api>
 		<!-- tables  -->
+		
+		<!--  table data -->
+		<gid-api auto=false
+			http-method="get" api-url={{tableDataUrl}} response='{{tableDataResponse}}'
+			api-timeout={{tableDataTimeout}} api-params={{tableDataParams}}> </gid-api>
+		<!--  table data -->
+		
+		<!--  recommendation -->
+		<gid-api auto=false
+			http-method="get" api-url={{recommendationUrl}} response='{{recommendationResponse}}'
+			api-timeout={{recommendationTimeout}} api-params={{recommendationParams}}> </gid-api>
+		<!--  recommendation -->
 		
 	<!--  rest api handling -->
 	
@@ -585,12 +603,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <!-- Table data -->
           <template is="dom-if" if="{{tableColumns.length}}">
             <div class="concept-identification">
-              <mdb-coverage-table selected-column="{{selectedColumn}}" title-text="{{selectedTable.name}}" help-text="Coverage table" columns="{{tableColumns}}"
+              <mdb-coverage-table selected-column="{{selectedColumn}}" title-text="{{selectedTable.table}}" help-text="Coverage table" columns="{{tableColumns}}"
                 items="{{tableData}}"></mdb-coverage-table>
 
               <!-- Recommended concepts -->
               <div class="recommended-concepts">
-                <mdb-concept-recommendation property="{{selectedConcept}}" recommendation-factor="0"></mdb-concept-recommendation>
+                <mdb-concept-recommendation property="{{selectedConcept.label}}" recommendation-factor="0"></mdb-concept-recommendation>
                 <template is="dom-if" if="{{isConceptIdentified}}">
                   <div class="concept-identified">
                     <div class="success-message">
@@ -744,6 +762,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: false,
           notify: true
         },
+        lobsUrl:{
+            type: String,
+      	        notify: true
+      	 	},
+      	 	lobsTimeout : {
+          		type: Number,
+      	        notify: true,
+      	        value : 0
+      	   },
+      	 lobsResponse : {
+     		type : Object,
+     		notify : true,
+     		observer : 'lobsResponseChanged'
+      	  },
+      	lobsParams : {
+      		  type: String,
+      		  notify : true
+      	  },
         domainUrl:{
          type: String,
    	        notify: true
@@ -834,6 +870,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   		  type: String,
   		  notify : true
   	  },
+  	  
+  	tableDataUrl:{
+        type: String,
+  	        notify: true
+  	 	},
+ 	tableDataTimeout : {
+   		type: Number,
+        notify: true,
+        value : 0
+   },
+  	 tableDataResponse : {
+ 		type : Object,
+ 		notify : true,
+ 		observer : 'tableDataResponseChanged'
+  	  },
+  	tableDataParams : {
+  		  type: String,
+  		  notify : true
+  	  },
+  	recommendationUrl:{
+        type: String,
+  	        notify: true
+  	 	},
+  	 	recommendationTimeout : {
+      		type: Number,
+  	        notify: true,
+  	        value : 0
+  	   },
+  	 recommendationResponse : {
+ 		type : Object,
+ 		notify : true,
+ 		observer : 'recommendationResponseChanged'
+  	  },
+  	recommendationParams : {
+  		  type: String,
+  		  notify : true
+  	  },
         identifiedConcept: String
       },
 
@@ -852,11 +925,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       attached: function () {
         var that = this;
-        this._dataSource.getLOBs()
-          .then(function (lobs) {
-            that.set('lobs', lobs.map(function (e) { return e.toUpperCase() }));
-            that._setSelectedLob();
-          });
+//         this._dataSource.getLOBs()
+//           .then(function (lobs) {
+//         	  debugger
+//             that.set('lobs', lobs.map(function (e) { return e.toUpperCase() }));
+//             that._setSelectedLob();
+//           });
+
+        this.lobsUrl = "/src/assets/config.json";
+        this.lobsTimeout = this.lobsTimeout - 1;
 
         this.addEventListener('concept-identified', function (e) {
           that.isConceptIdentified = true;
@@ -864,6 +941,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
       },
 
+      lobsResponseChanged: function(newvalue, oldvalue){
+    	    if(newvalue != null){
+    		  this.async(function() {
+    			  this.set('lobs', newvalue.lobs.map(function (e) { return e.toUpperCase() }));
+    			  this._setSelectedLob();
+    	 		 	          }, 500);
+    		  
+    	  }
+      },
       _setSelectedLob: function () {
         if (this.lobs) {
           this.selectedLob = this.lobs[this._selectedTab];
@@ -894,12 +980,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           this.isConceptIdentified = false;
           this.identifiedConcept = '';
+          
+          //using mock json
+          this.domainUrl = '/src/assets/domains.json';
+          this.domainTimeout = this.domainTimeout - 1;
+          /**
+           // using GID's rest api
           this.domainUrl = configObj.gdprHost + "api/v1/domains";
           this.domainParams =  JSON.stringify({
         	  "token" : configObj.accessToken,
         	  "limit":10, 
         	  "offset":0});
 		  this.domainTimeout = this.domainTimeout - 1;
+		  **/
         }
       },
       domainResponseChanged : function(newvalue, oldvalue){
@@ -927,12 +1020,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._resetEmptyMessage('mdb-dimension-finder.applications');
         this.set('applications', []);
         if(this.selectedConcept){
+        	//using mock json
+            this.applicationUrl = '/src/assets/applications.json';
+            this.applicationTimeout = this.applicationTimeout - 1;
+            /**
+             // using GID's rest api
 	        this.applicationUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications";
 	        this.applicationParams =  JSON.stringify({
 	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
 			  this.applicationTimeout = this.applicationTimeout - 1;
+		   **/
         }
       },
       
@@ -952,12 +1051,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('databases', []);
 
         if (this.selectedApplication) {
+        	//using mock json
+            this.databaseUrl = '/src/assets/databases.json';
+            this.databaseTimeout = this.databaseTimeout - 1;
+            /**
+             // using GID's rest api
         	this.databaseUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases";
 	        this.databaseParams =  JSON.stringify({
 	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
 			  this.databaseTimeout = this.databaseTimeout - 1;
+		   **/
         }
       },
       databaseResponseChanged: function(newvalue, oldvalue){
@@ -974,12 +1079,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('schemas', []);
 
         if (this.selectedDatabase) {
+        	//using mock json
+            this.schemaUrl = '/src/assets/schemas.json';
+            this.schemaTimeout = this.schemaTimeout - 1;
+            /**
+             // using GID's rest api
         	this.schemaUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases/" + this.selectedDatabase.id + "/schemas";
 	        this.schemaParams =  JSON.stringify({
 	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
 			  this.schemaTimeout = this.schemaTimeout - 1;
+		 **/
         }
       },
       schemaResponseChanged: function(newvalue, oldvalue){
@@ -996,6 +1107,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('tables', []);
 
         if (this.selectedSchema) {
+        	//using mock json
+            this.tableUrl = '/src/assets/tables.json';
+            this.tableTimeout = this.tableTimeout - 1;
+            /**
+             // using GID's rest api
         	this.tableUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id +
         					"/applications/" + this.selectedApplication.id +
         					"/databases/"+ this.selectedDatabase.id + 
@@ -1005,7 +1121,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      	  "token" : configObj.accessToken,
 	      	  "limit":10, 
 	      	  "offset":0});
-			  this.tableTimeout = this.schemaTimeout - 1;
+			  this.tableTimeout = this.tableTimeout - 1;
+		**/
         }
       },
       tableResponseChanged: function(newvalue, oldvalue){
@@ -1022,32 +1139,56 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.set('tableData', []);
         this.isConceptIdentified = false;
         this.identifiedConcept = undefined;
-
         if (this.selectedTable) {
-          var that = this;
-          this._dataSource.getTableData(this.selectedLob, this.selectedConcept, this.selectedApplication, this.selectedDatabase, this.selectedSchema, this.selectedTable)
-            .then(function (tableData) {
-              that.set('tableColumns', tableData.columns);
-              that.set('tableData', tableData.rows);
-              that.selectedColumn = tableData.columns[0].name
-            });
+	      	//using mock json
+	        this.tableDataUrl = '/src/assets/tableData.json';
+	      	this.tableDataTimeout = this.tableDataTimeout - 1;
         }
+//         if (this.selectedTable) {
+//           var that = this;
+//           this._dataSource.getTableData(this.selectedLob, this.selectedConcept, this.selectedApplication, this.selectedDatabase, this.selectedSchema, this.selectedTable)
+//             .then(function (tableData) {
+//               that.set('tableColumns', tableData.columns);
+//               that.set('tableData', tableData.rows);
+//               that.selectedColumn = tableData.columns[0].name
+//             });
+//         }
       },
-
+      tableDataResponseChanged: function(newvalue, oldvalue){
+    	  this.tableColumns = [];
+    	  this.tableData = [];
+    	  if(newvalue != null){
+    		  this.async(function() {
+    	       		this.tableColumns =  this.tableColumns.concat(newvalue.columns);
+    	       		this.tableData = this.tableData.concat(newvalue.rows);
+    	 		 	          }, 500);
+    		  this.selectedColumn = newvalue.columns[0].name;
+    	  }
+      },
       _selectedColumnChanged: function () {
         this.set('recommendedConcepts', []);
         this.isConceptIdentified = false;
         this.identifiedConcept = undefined;
 
         if (this.selectedColumn) {
-          var that = this;
-          this._dataSource.getRecommendedConcepts(this.selectedLob, this.selectedConcept, this.selectedApplication, this.selectedDatabase, this.selectedSchema, this.selectedTable, this.selectedColumn)
-            .then(function (recommendations) {
-              that.set('recommendedConcepts', recommendations);
-            });
+        	//using mock json
+	        this.recommendationUrl = '/src/assets/recommendations.json';
+	      	this.recommendationTimeout = this.recommendationTimeout - 1;
+//           var that = this;
+//           this._dataSource.getRecommendedConcepts(this.selectedLob, this.selectedConcept.label, this.selectedApplication.application, this.selectedDatabase.connection, this.selectedSchema.schema, this.selectedTable.table, this.selectedColumn)
+//             .then(function (recommendations) {
+//               that.set('recommendedConcepts', recommendations);
+//             });
         }
       },
-
+      recommendationResponseChanged: function(newvalue, oldvalue){
+    	  this.recommendedConcepts = [];
+    	  if(newvalue != null){
+    		  this.async(function() {
+    	       		this.recommendedConcepts = this.recommendedConcepts.concat(newvalue.recommendations);
+    	 		 	          }, 500);
+    	  }
+      },
       _resetEmptyMessage: function (selector) {
         var component = this.querySelector(selector);
         if (component) component.emptyMessage = '';
