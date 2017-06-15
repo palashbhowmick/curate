@@ -764,60 +764,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         lobsUrl:{
             type: String,
-      	        notify: true
-      	 	},
-      	 	lobsTimeout : {
-          		type: Number,
-      	        notify: true,
-      	        value : 0
-      	   },
-      	 lobsResponse : {
-     		type : Object,
-     		notify : true,
-     		observer : 'lobsResponseChanged'
-      	  },
-      	lobsParams : {
-      		  type: String,
-      		  notify : true
-      	  },
-        domainUrl:{
-         type: String,
-   	        notify: true
+      	    notify: true
    	 	},
-   	   domainTimeout : {
+   	 	lobsTimeout : {
        		type: Number,
    	        notify: true,
    	        value : 0
-   	   },
-   	  domainResponse : {
-  		type : Object,
-  		notify : true,
-  		observer : 'domainResponseChanged'
-   	  },
-   	  domainParams : {
-   		  type: String,
-   		  notify : true
-   	  },
-   	 applicationUrl:{
-        type: String,
+   	    },
+   	 	lobsResponse : {
+    		type : Object,
+    		notify : true,
+    		observer : 'lobsResponseChanged'
+    	},
+      	lobsParams : {
+    		 type: String,
+    		 notify : true
+    	},
+        domainUrl:{
+           type: String,
+   	        notify: true
+   	 	},
+   	    domainTimeout : {
+       		type: Number,
+   	        notify: true,
+   	        value : 0
+   	    },
+   	    domainResponse : {
+	  		type : Object,
+	  		notify : true,
+	  		observer : 'domainResponseChanged'
+   	  	},
+   	    domainParams : {
+	   		type: String,
+	   		notify : true
+	   	},
+   	    applicationUrl:{
+            type: String,
   	        notify: true
   	 	},
   	 	applicationTimeout : {
       		type: Number,
   	        notify: true,
   	        value : 0
-  	   },
-  	 applicationResponse : {
- 		type : Object,
- 		notify : true,
- 		observer : 'applicationResponseChanged'
-  	  },
-  	applicationParams : {
-  		  type: String,
-  		  notify : true
-  	  },
-  	databaseUrl:{
-        type: String,
+  	    },
+  	    applicationResponse : {
+	 		type : Object,
+	 		notify : true,
+	 		observer : 'applicationResponseChanged'
+  	  	},
+  		applicationParams : {
+  		    type: String,
+  		    notify : true
+  	  	},
+  		databaseUrl:{
+            type: String,
   	        notify: true
   	 	},
   	 	databaseTimeout : {
@@ -825,89 +825,88 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   	        notify: true,
   	        value : 0
   	   },
-  	 databaseResponse : {
- 		type : Object,
- 		notify : true,
- 		observer : 'databaseResponseChanged'
-  	  },
-  	databaseParams : {
-  		  type: String,
-  		  notify : true
-  	  },
-  	schemaUrl:{
-        type: String,
-  	        notify: true
-  	 	},
- 	schemaTimeout : {
-   		type: Number,
-        notify: true,
-        value : 0
-   },
-  	 schemaResponse : {
- 		type : Object,
- 		notify : true,
- 		observer : 'schemaResponseChanged'
-  	  },
-  	schemaParams : {
-  		  type: String,
-  		  notify : true
-  	  },
-  	tableUrl:{
-        type: String,
-  	        notify: true
-  	 	},
- 	tableTimeout : {
-   		type: Number,
-        notify: true,
-        value : 0
-   },
-  	 tableResponse : {
- 		type : Object,
- 		notify : true,
- 		observer : 'tableResponseChanged'
-  	  },
-  	tableParams : {
-  		  type: String,
-  		  notify : true
-  	  },
-  	  
-  	tableDataUrl:{
-        type: String,
-  	        notify: true
-  	 	},
- 	tableDataTimeout : {
-   		type: Number,
-        notify: true,
-        value : 0
-   },
-  	 tableDataResponse : {
- 		type : Object,
- 		notify : true,
- 		observer : 'tableDataResponseChanged'
-  	  },
-  	tableDataParams : {
-  		  type: String,
-  		  notify : true
-  	  },
-  	recommendationUrl:{
-        type: String,
-  	        notify: true
-  	 	},
-  	 	recommendationTimeout : {
-      		type: Number,
-  	        notify: true,
-  	        value : 0
+  	   databaseResponse : {
+	 		type : Object,
+	 		notify : true,
+	 		observer : 'databaseResponseChanged'
   	   },
-  	 recommendationResponse : {
- 		type : Object,
- 		notify : true,
- 		observer : 'recommendationResponseChanged'
-  	  },
-  	recommendationParams : {
+  	   databaseParams : {
+  		  type: String,
+  		  notify : true
+  	   },
+  	   schemaUrl:{
+        	type: String,
+  	        notify: true
+  	   },
+ 	   schemaTimeout : {
+	   		type: Number,
+	        notify: true,
+	        value : 0
+       },
+  	   schemaResponse : {
+	 		type : Object,
+	 		notify : true,
+	 		observer : 'schemaResponseChanged'
+  	   },
+  	   schemaParams : {
+  		  type: String,
+  		  notify : true
+  	   },
+  	   tableUrl:{
+           type: String,
+  	       notify: true
+  	   },
+ 	   tableTimeout : {
+	   		type: Number,
+	        notify: true,
+	        value : 0
+       },
+  	   tableResponse : {
+	 		type : Object,
+	 		notify : true,
+	 		observer : 'tableResponseChanged'
+  	   },
+  	   tableParams : {
   		  type: String,
   		  notify : true
   	  },
-        identifiedConcept: String
+  	  tableDataUrl:{
+        	type: String,
+  	        notify: true
+  	  },
+ 	  tableDataTimeout : {
+	   		type: Number,
+	        notify: true,
+	        value : 0
+      },
+  	  tableDataResponse : {
+	 		type : Object,
+	 		notify : true,
+	 		observer : 'tableDataResponseChanged'
+  	  },
+  	  tableDataParams : {
+	  		  type: String,
+	  		  notify : true
+  	  },
+  	  recommendationUrl:{
+        	type: String,
+  	        notify: true
+  	  },
+	  recommendationTimeout : {
+    		type: Number,
+	        notify: true,
+	        value : 0
+	  },
+  	  recommendationResponse : {
+	 		type : Object,
+	 		notify : true,
+	 		observer : 'recommendationResponseChanged'
+  	  },
+  	  recommendationParams : {
+	  		  type: String,
+	  		  notify : true
+  	  },
+      identifiedConcept: String
       },
 
       ready: function () {
@@ -925,13 +924,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       attached: function () {
         var that = this;
-//         this._dataSource.getLOBs()
-//           .then(function (lobs) {
-//         	  debugger
-//             that.set('lobs', lobs.map(function (e) { return e.toUpperCase() }));
-//             that._setSelectedLob();
-//           });
-
         this.lobsUrl = "/src/assets/config.json";
         this.lobsTimeout = this.lobsTimeout - 1;
 
@@ -984,15 +976,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           //using mock json
           this.domainUrl = '/src/assets/domains.json';
           this.domainTimeout = this.domainTimeout - 1;
-          /**
-           // using GID's rest api
-          this.domainUrl = configObj.gdprHost + "api/v1/domains";
-          this.domainParams =  JSON.stringify({
-        	  "token" : configObj.accessToken,
-        	  "limit":10, 
-        	  "offset":0});
-		  this.domainTimeout = this.domainTimeout - 1;
-		  **/
         }
       },
       domainResponseChanged : function(newvalue, oldvalue){
@@ -1023,15 +1006,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         	//using mock json
             this.applicationUrl = '/src/assets/applications.json';
             this.applicationTimeout = this.applicationTimeout - 1;
-            /**
-             // using GID's rest api
-	        this.applicationUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications";
-	        this.applicationParams =  JSON.stringify({
-	      	  "token" : configObj.accessToken,
-	      	  "limit":10, 
-	      	  "offset":0});
-			  this.applicationTimeout = this.applicationTimeout - 1;
-		   **/
         }
       },
       
@@ -1054,15 +1028,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         	//using mock json
             this.databaseUrl = '/src/assets/databases.json';
             this.databaseTimeout = this.databaseTimeout - 1;
-            /**
-             // using GID's rest api
-        	this.databaseUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases";
-	        this.databaseParams =  JSON.stringify({
-	      	  "token" : configObj.accessToken,
-	      	  "limit":10, 
-	      	  "offset":0});
-			  this.databaseTimeout = this.databaseTimeout - 1;
-		   **/
         }
       },
       databaseResponseChanged: function(newvalue, oldvalue){
@@ -1082,15 +1047,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         	//using mock json
             this.schemaUrl = '/src/assets/schemas.json';
             this.schemaTimeout = this.schemaTimeout - 1;
-            /**
-             // using GID's rest api
-        	this.schemaUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id + "/applications/" + this.selectedApplication.id + "/databases/" + this.selectedDatabase.id + "/schemas";
-	        this.schemaParams =  JSON.stringify({
-	      	  "token" : configObj.accessToken,
-	      	  "limit":10, 
-	      	  "offset":0});
-			  this.schemaTimeout = this.schemaTimeout - 1;
-		 **/
         }
       },
       schemaResponseChanged: function(newvalue, oldvalue){
@@ -1110,19 +1066,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         	//using mock json
             this.tableUrl = '/src/assets/tables.json';
             this.tableTimeout = this.tableTimeout - 1;
-            /**
-             // using GID's rest api
-        	this.tableUrl = configObj.gdprHost + "api/v1/domains/" + this.selectedConcept.id +
-        					"/applications/" + this.selectedApplication.id +
-        					"/databases/"+ this.selectedDatabase.id + 
-        					"/schemas/"+ this.selectedSchema.id +
-        					"/tables";
-	        this.tableParams =  JSON.stringify({
-	      	  "token" : configObj.accessToken,
-	      	  "limit":10, 
-	      	  "offset":0});
-			  this.tableTimeout = this.tableTimeout - 1;
-		**/
         }
       },
       tableResponseChanged: function(newvalue, oldvalue){
@@ -1144,15 +1087,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        this.tableDataUrl = '/src/assets/tableData.json';
 	      	this.tableDataTimeout = this.tableDataTimeout - 1;
         }
-//         if (this.selectedTable) {
-//           var that = this;
-//           this._dataSource.getTableData(this.selectedLob, this.selectedConcept, this.selectedApplication, this.selectedDatabase, this.selectedSchema, this.selectedTable)
-//             .then(function (tableData) {
-//               that.set('tableColumns', tableData.columns);
-//               that.set('tableData', tableData.rows);
-//               that.selectedColumn = tableData.columns[0].name
-//             });
-//         }
       },
       tableDataResponseChanged: function(newvalue, oldvalue){
     	  this.tableColumns = [];
@@ -1174,11 +1108,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         	//using mock json
 	        this.recommendationUrl = '/src/assets/recommendations.json';
 	      	this.recommendationTimeout = this.recommendationTimeout - 1;
-//           var that = this;
-//           this._dataSource.getRecommendedConcepts(this.selectedLob, this.selectedConcept.label, this.selectedApplication.application, this.selectedDatabase.connection, this.selectedSchema.schema, this.selectedTable.table, this.selectedColumn)
-//             .then(function (recommendations) {
-//               that.set('recommendedConcepts', recommendations);
-//             });
         }
       },
       recommendationResponseChanged: function(newvalue, oldvalue){
