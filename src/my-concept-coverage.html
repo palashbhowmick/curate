@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/mdb-recommended-concepts/mdb-recommended-concepts.html">
 <link rel="import" href="../bower_components/mdb-coverage-table/mdb-coverage-table.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="gid-api.html">
 
 <dom-module id="concept-coverage">
@@ -37,7 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --mdb-recommended-concepts-property-name: {
           color: #aaa;
         }
-        --stat-value: {
+        /*--stat-value: {
           font-size: 3em;
           font-weight: lighter;
         }
@@ -46,7 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           font-weight: 100;
           margin: 0;
           color: #afafaf;
-        }
+        }*/
       }
 
       [slot='body'] {
@@ -137,6 +138,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         right: 0;
         top: 50%;
         transform: translate(0, -50%);
+        color: #fff;
       }
 
        :host mdb-dimension-finder {
@@ -169,14 +171,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin-top: var(--standard-padding, 20px);
         padding-bottom: var(--standard-padding, 20px);
         padding-top: var(--standard-padding, 20px);
+        font-size: 0;		
+        display: flex;		
+        justify-content: center;		
+        flex-wrap: nowrap;	
       }
 
        :host .db-entities mdb-dimension-finder {
-        margin-left: var(--standard-padding, 20px);
-        float: left;
+        font-size: 0.7rem;
+        padding: 0 15px 0 15px;
         --mdb-dimension-finder-radio-button: {
-          padding-left: 14px;
-          padding-right: 14px;
+          padding-left: 14.5px;
+          padding-right: 14.5px;
         }
         --mdb-dimension-finder-searchbox-container: {
           padding: 20px;
@@ -201,8 +207,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
        :host[w-1024] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
+        padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
           padding-left: 10px;
           padding-right: 10px;
@@ -216,11 +221,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
        :host[w-1280] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
+        padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
-          padding-left: 14px;
-          padding-right: 14px;
+          padding-left: 12px;
+          padding-right: 11px;
         }
       }
 
@@ -231,11 +235,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
        :host[w-1360] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
+        padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
-          padding-left: 19px;
-          padding-right: 19px;
+          padding-left: 18px;
+          padding-right: 18px;
         }
       }
 
@@ -246,10 +249,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
        :host[w-1366] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
+        padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
-          padding-left: 18px;
+          padding-left: 17px;
           padding-right: 18px;
         }
       }
@@ -261,11 +263,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
        :host[w-1440] .db-entities mdb-dimension-finder {
-        margin-left: 20px;
-        float: left;
+        padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
-          padding-left: 8px;
-          padding-right: 8px;
+          padding-left: 7px;
+          padding-right: 7px;
         }
       }
 
@@ -306,11 +307,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
        :host[w-1920] .db-entities mdb-dimension-finder {
-        margin-left: 30px;
-        float: left;
         --mdb-dimension-finder-radio-button: {
-          padding-left: 35px;
-          padding-right: 35px;
+          padding-left: 34px;
+          padding-right: 34px;
         }
       }
 
@@ -321,11 +320,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
        :host[w-2560] .db-entities mdb-dimension-finder {
-        margin-left: 30px;
-        float: left;
         --mdb-dimension-finder-radio-button: {
-          padding-left: 75px;
-          padding-right: 75px;
+          padding-left: 74px;
+          padding-right: 74px;
         }
       }
 
@@ -360,8 +357,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        :host .concept-identified {
         text-align: center;
         font-size: 1.6em;
-        --iron-icon-width: 40px;
-        --iron-icon-height: 40px;
       }
 
        :host .concept-identified iron-icon {
@@ -371,6 +366,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         border-radius: 50%;
         --iron-icon-width: 55px;
         --iron-icon-height: 55px;
+        --iron-icon-fill-color: #fff;
       }
 
        :host .concept-identification {
@@ -405,12 +401,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin-right: var(--standard-padding, 20px);
         margin-top: var(--standard-padding, 20px);
         --mdb-coverage-table: {
+          @apply(--app-table);
           height: 511px;
         }
         --mdb-coverage-table-title: {
           color: #aaa;
           margin-top: 0;
           margin-bottom: 20px;
+        }
+        --mdb-coverage-table-header-cell: {		
+          border-top: 0;		
         }
         --mdb-coverage-table-options: {
           color: #aaa;
@@ -419,19 +419,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           font-size: 0.9em;
           padding-left: 10px;
         }
-        --mdb-coverage-table-cell: {
-          height: 18px;
-          padding: 14px;
-        }
-        --mdb-coverage-table-body-cell: {
-          color: #aaa;
-        }
+        
       }
 
        :host .recommended-concepts {
         padding-top: 44px;
         display: inline-block;
         width: 40%;
+      }
+      :host .no-table {		
+        background-color: #fcfdff;		
+        height: 100px;		
+        border: 1px solid #e1e6ed;		
+        position: relative;		
+        margin-top: var(--standard-padding, 20px);		
+      }		
+       :host .no-table p {		
+        position: absolute;		
+        top: 25%;		
+        left: 50%;		
+        transform: translate(-50%, -50%);		
+        font-size: 20px;		
+        font-weight: 400;		
       }
     </style>
 	
@@ -490,9 +499,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <page-layout heading="Concept Coverage" help-text="Concept Coverage">
       <div slot="body">
         <mdb-metric-display-container>
-          <mdb-metric-display stat-value="0.2%" stat-description="Coverage across 1 application"></mdb-metric-display>
-          <mdb-metric-display stat-value="279 days" stat-description="ETA (based on yesterday)"></mdb-metric-display>
-          <mdb-metric-display stat-value="25" stat-description="Confirmed Columns"></mdb-metric-display>
+          <mdb-metric-display  stat-value="{{coverage}}" stat-description="Coverage across 1 application"></mdb-metric-display>
+          <mdb-metric-display stat-value="{{eta}}" stat-description="ETA (based on yesterday)"></mdb-metric-display>
+          <mdb-metric-display stat-value="{{confirmedColumns}}" stat-description="Confirmed Columns"></mdb-metric-display>
         </mdb-metric-display-container>
 
         <!-- LOBs -->
@@ -601,32 +610,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </div>
 
           <!-- Table data -->
-          <template is="dom-if" if="{{tableColumns.length}}">
-            <div class="concept-identification">
-              <mdb-coverage-table selected-column="{{selectedColumn}}" title-text="{{selectedTable.table}}" help-text="Coverage table" columns="{{tableColumns}}"
-                items="{{tableData}}"></mdb-coverage-table>
+          <template is="dom-if" if="[[selectedTable]]">
+            <template is="dom-if" if="[[!loadingInProgress]]">
+              <template is="dom-if" if="[[tableColumns.length]]">
+                <div class="concept-identification">
+                  <mdb-coverage-table selected-column="{{selectedColumn}}" title-text="[[selectedTable.table]]" help-text="Coverage table" columns="[[tableColumns]]"
+                    items="[[tableData]]"></mdb-coverage-table>
 
               <!-- Recommended concepts -->
               <div class="recommended-concepts">
-                <mdb-concept-recommendation property="{{selectedConcept.label}}" recommendation-factor="0"></mdb-concept-recommendation>
-                <template is="dom-if" if="{{isConceptIdentified}}">
-                  <div class="concept-identified">
-                    <div class="success-message">
-                      <iron-icon class="arrow" icon="icons:done"></iron-icon>
-                      <mdb-title>Hurray!</mdb-title>
-                      <p>Thanks for identifying {{selectedColumn}} as {{identifiedConcept}}.</p>
-                      <p>You've helped make data better.</p>
-                    </div>
+                    <!-- Recommended concepts -->
+                    <mdb-concept-recommendation property="[[selectedConcept.label]]" recommendation-factor="{{selectedConceptRecommendation}}" recommended="{{isSelectedConceptRecommended}}"></mdb-concept-recommendation>
+                    <template is="dom-if" if="[[!isConceptIdentified]]">
+                      <mdb-recommended-concepts recommendations="{{recommendedConcepts}}"></mdb-recommended-concepts>
+                    </template>
+                    <template is="dom-if" if="[[isConceptIdentified]]">
+                      <div class="concept-identified">
+                        <div class="success-message">
+                          <iron-icon class="arrow" icon="icons:done"></iron-icon>
+                          <mdb-title>Hurray!</mdb-title>
+                          <p>Thanks for identifying [[selectedColumn]] as [[identifiedConcept]].</p>
+                          <p>You've helped make data better.</p>
+                          <p>
+                            <paper-button class="undo" on-click="_undoConceptIdentification">Not a match</paper-button>
+                          </p>
+                        </div>
+                      </div>
+                    </template>
                   </div>
-                </template>
-                <template is="dom-if" if="{{!isConceptIdentified}}">
-                  <mdb-recommended-concepts recommendations="{{recommendedConcepts}}"></mdb-recommended-concepts>
-                </template>
-              </div>
-            </div>
+                </div>
+              </template>
+              <template is="dom-if" if="[[!tableColumns.length]]">
+                <div class="no-table">
+                  <p>No table found.</p>
+                </div>
+             </template>
+            </template>
           </template>
         </template>
-
       </div>
     </page-layout>
   </template>
@@ -679,7 +700,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true,
           observer: '_conceptChanged'
         },
-
+        selectedConceptRecommendation: {		
+            type: Number,		
+            value: 0		
+          },		
+          isSelectedConceptRecommended: {		
+            type: String,		
+            value: 'maybe'		
+          },
         applications: {
           type: Array,
           value: [],
@@ -906,7 +934,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  		  type: String,
 	  		  notify : true
   	  },
-      identifiedConcept: String
+      identifiedConcept: String,
+      coverage: {
+          type: Number,
+          value: 0
+        },
+
+        eta: {
+          type: Number,
+          value: 0
+        },
+
+        confirmedColumns: {
+          type: Number,
+          value: 0
+        },
+
+        loadingInProgress: {
+          type: Boolean,
+          value: false
+        }
       },
 
       ready: function () {
@@ -924,18 +971,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       attached: function () {
         var that = this;
-        this.lobsUrl = "/src/assets/config.json";
+        this.lobsUrl = "/src/assets/conceptCoverageData.json";
         this.lobsTimeout = this.lobsTimeout - 1;
 
-        this.addEventListener('concept-identified', function (e) {
-          that.isConceptIdentified = true;
-          that.identifiedConcept = e.detail;
+        this.addEventListener('recommendation-changed', function (e) {
+            that.isConceptIdentified = e.detail.recommended === 'yes';
+
+            if (that.isConceptIdentified) {
+              that.identifiedConcept = e.detail.property;
+            } else {
+              that.identifiedConcept = undefined;
+            }
+
+            //Update if selected concept recommendation changed
+            if (that.selectedConcept === e.detail.property) {
+              that.selectedConceptRecommendation = e.detail.recommendationFactor;
+              that.isSelectedConceptRecommended = e.detail.recommended;
+            }
+
+            //Update if an item from the list is changed
+            var updatedConcept = that.recommendedConcepts.find(function (i) { return i.property === e.detail.property; });
+            if (updatedConcept) updatedConcept.recommendationFactor = e.detail.recommendationFactor;
         });
       },
-
       lobsResponseChanged: function(newvalue, oldvalue){
     	    if(newvalue != null){
     		  this.async(function() {
+    			  this.coverage = newvalue.coverage;
+    			  this.eta = newvalue.eta;
+    			  this.confirmedColumns = newvalue.confirmedColumns;
     			  this.set('lobs', newvalue.lobs.map(function (e) { return e.toUpperCase() }));
     			  this._setSelectedLob();
     	 		 	          }, 500);
@@ -955,7 +1019,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _lobChanged: function () {
         var that = this;
-        that.set('concepts', []);
+        this.set('concepts', []);
 
         if (this.selectedLob) {
           //Reset everything
@@ -1083,6 +1147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.isConceptIdentified = false;
         this.identifiedConcept = undefined;
         if (this.selectedTable) {
+        	this.loadingInProgress = true;
 	      	//using mock json
 	        this.tableDataUrl = '/src/assets/tableData.json';
 	      	this.tableDataTimeout = this.tableDataTimeout - 1;
@@ -1097,6 +1162,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     	       		this.tableData = this.tableData.concat(newvalue.rows);
     	 		 	          }, 500);
     		  this.selectedColumn = newvalue.columns[0].name;
+    		  this.loadingInProgress = false;
     	  }
       },
       _selectedColumnChanged: function () {
@@ -1114,14 +1180,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     	  this.recommendedConcepts = [];
     	  if(newvalue != null){
     		  this.async(function() {
-    	       		this.recommendedConcepts = this.recommendedConcepts.concat(newvalue.recommendations);
+    			  var r = newvalue.recommendations[0];		
+                  var rf = r.recommendationFactor + 3;		
+                  //Initial values for selected concept recommendation		
+                  this.isSelectedConceptRecommended = 'maybe';		
+                  this.selectedConceptRecommendation = rf < 100 ? rf : 99;
+    	       	  this.recommendedConcepts = this.recommendedConcepts.concat(newvalue.recommendations);
     	 		 	          }, 500);
     	  }
       },
       _resetEmptyMessage: function (selector) {
         var component = this.querySelector(selector);
         if (component) component.emptyMessage = '';
-      }
+      },
+      _undoConceptIdentification: function () {
+          var concept = this.identifiedConcept,
+            recommendedConcepts = this.get('recommendedConcepts');
+
+          this.isConceptIdentified = false;
+          this.identifiedConcept = undefined;
+
+          if (concept.trim() === this.selectedConcept) {
+            this.isSelectedConceptRecommended = 'maybe';
+          }
+
+          this.set('recommendedConcepts', recommendedConcepts.map(function (e) {
+            if (e.property.trim() === concept.trim()) {
+              e.recommended = 'maybe';
+            }
+            return e;
+          }));
+        },
+
+        _showTable: function () {
+          return this.selectedTable && !this.loadingInProgress && this.tableColumns.length > 0;
+        }
     });
   </script>
 </dom-module>

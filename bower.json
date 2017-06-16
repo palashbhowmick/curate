@@ -4,7 +4,7 @@
     "SOUNAK PAL"
   ],
   "dependencies": {
-    "app-layout": "PolymerElements/app-layout#^0.10.0",
+     "app-layout": "PolymerElements/app-layout#^0.10.0",
     "app-route": "PolymerElements/app-route#^0.9.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
     "iron-icon": "PolymerElements/iron-icon#^1.0.0",
@@ -27,8 +27,17 @@
     "mdb-dimension-finder": "git://github.com/makedatabetter-dev/mdb-dimension-finder.git",
     "mdb-coverage-table": "git://github.com/makedatabetter-dev/mdb-coverage-table.git",
     "mdb-recommended-concepts": "git://github.com/makedatabetter-dev/mdb-recommended-concepts.git",
+    "mdb-facet-discovery": "git://github.com/makedatabetter-dev/mdb-facet-discovery.git",
+    "mdb-example-values": "git://github.com/makedatabetter-dev/mdb-example-values.git",
+    "atom-table": "git://github.com/makedatabetter-dev/atom-table.git",
+    "atom-feedback": "git://github.com/makedatabetter-dev/atom-feedback.git",
+    "atom-google-sheet-adapter": "git://github.com/makedatabetter-dev/atom-google-sheet-adapter.git",
+    "atom-user-goals-visualization": "git://github.com/makedatabetter-dev/atom-user-goals-visualization.git",
     "iron-ajax": "PolymerElements/iron-ajax#^1.4.4",
     "google-sheets": "GoogleWebComponents/google-sheets#^1.0.6",
+    "paper-button": "PolymerElements/paper-button#^2.0.0",
+    "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0",
+    "paper-menu": "PolymerElements/paper-menu#^1.3.0",
     "polymer-global-variables": "1.1.0"
   },
   "devDependencies": {
