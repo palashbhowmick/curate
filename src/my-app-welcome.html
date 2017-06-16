@@ -7,29 +7,30 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="page-layout.html">
-
-<dom-module id="my-view3">
+<dom-module id="app-welcome">
   <template>
     <style include="shared-styles">
        :host {
-        display: block;
-        padding: 10px;
+        height: 100%;
+      }
+
+       :host img {
+        width: 100%;
       }
     </style>
-
-    <page-layout heading="Review and Classify">
-      <div class="banner" slot="body">
+    <page-layout heading="Welcome">
+      <div slot="body">
+        <img src="../images/welcome.png" />
       </div>
     </page-layout>
   </template>
 
   <script>
     Polymer({
-      is: 'my-view3',
+      is: 'app-welcome',
     });
   </script>
 </dom-module>
