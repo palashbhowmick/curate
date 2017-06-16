@@ -11,8 +11,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="page-layout.html">
-<link rel="import" href="../bower_components/atom-google-sheet-adapter/atom-google-sheet-adapter.html">
+<!-- <link rel="import" href="../bower_components/atom-google-sheet-adapter/atom-google-sheet-adapter.html"> -->
 <link rel="import" href="../bower_components/atom-table/atom-table.html">
+<link rel="import" href="gid-api.html">
 
 <dom-module id="request-status">
   <template>
@@ -27,10 +28,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
     </style>
-
+    <!--  rest api handling -->
+	
+		
+		<gid-api auto=false
+			http-method="get" api-url={{requestStatusUrl}} response='{{requestStatusResponse}}'
+			api-timeout={{requestStatusUrlTimeout}} api-params={{requestStatusUrlParams}}> </gid-api>			
+	    
+	<!-- rest api handling -->
+	
     <page-layout heading="Requests & Status">
       <div class="banner" slot="body">
-        <atom-google-sheet-adapter key="1ytcM-WdkP4orU4HdwpgX62MQELCdhWlbaTci-IZhmsQ"></atom-google-sheet-adapter>
+<!--         <atom-google-sheet-adapter key="1ytcM-WdkP4orU4HdwpgX62MQELCdhWlbaTci-IZhmsQ"></atom-google-sheet-adapter> -->
         <template is="dom-if" if="{{dataLoaded}}">
           <atom-table items="{{items}}">
 
@@ -91,6 +100,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
+    var table;
     Polymer({
       is: 'request-status',
 
@@ -98,24 +108,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         dataLoaded: {
           type: Boolean,
           value: false
-        }
+        },
+        requestStatusUrl:{
+            type: String,
+   	       notify: true
+   	   },
+   	   requestStatusTimeout : {
+ 	   		type: Number,
+ 	        notify: true,
+ 	        value : 0
+        },
+        requestStatusResponse : {
+ 	 		type : Object,
+ 	 		notify : true,
+ 	 		observer : 'requestStatusResponseChanged'
+   	   },
+   	   requestStatusParams : {
+   		  type: String,
+   		  notify : true
+   	  }
       },
 
       attached: function () {
         var that = this;
         var adapter = this.querySelector('atom-google-sheet-adapter');
-        adapter.read('mdb-data')
-          .then(function (rows) {
+//         var table = this.querySelector('atom-table');
+//         adapter.read('mdb-data')
+//           .then(function (rows) {
 
-            that.dataLoaded = true;
-            setTimeout(function () {
-              var table = that.querySelector('atom-table');
-
-              table.set('items', that._transform(rows))
-            }, 0);
-          });
+//             that.dataLoaded = true;
+//             setTimeout(function () {
+//               var table = that.querySelector('atom-table');
+// 			  console.log(table);
+//               table.set('items', that._transform(rows))
+//             }, 0);
+//           });
+        this.requestStatusUrl = '/src/assets/requestStatus.json';
+        this.requestStatusTimeout = this.requestStatusTimeout - 1;
       },
-
+      requestStatusResponseChanged: function(newvalue, oldvalue){
+    	  var that = this;
+    	  if(newvalue != null){
+    		  this.dataLoaded = true;
+    		  setTimeout(function () {
+    		   var table = that.querySelector('atom-table');
+	           table.set('items', that._transform(newvalue.rows))
+    		  }, 0);
+    	  }
+      },
       _transform: function (rows) {
         var data = [];
         var statuses = ['Pending for review', 'Accepted as concept', 'Rejected'];
