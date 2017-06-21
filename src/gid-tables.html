@@ -1,0 +1,58 @@
+<!--
+  Wrapper component for tables
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="gid-api.html">
+
+<dom-module id="gid-tables">
+  <template>
+        <!-- tables  -->
+	    <gid-api auto=false
+			http-method="get" api-url={{tableUrl}} response='{{tableResponse}}'
+			api-timeout={{tableTimeout}} api-params={{tableParams}}> </gid-api>
+		<!-- tables  -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-tables',
+        properties:{
+	        	tableUrl:{
+	                type: String,
+	       	       notify: true
+	       	   },
+	      	   tableTimeout : {
+	     	   		type: Number,
+	     	        notify: true,
+	     	        value : 0
+	            },
+	       	   tableResponse : {
+	     	 		type : Object,
+	     	 		notify : true,
+	     	 		observer : 'tableResponseChanged'
+	       	   },
+	       	   tableParams : {
+	       		  type: String,
+	       		  notify : true
+	       	  },
+	      	  tables: {
+	   	          type: Array,
+	   	          value: [],
+	   	          notify: true
+	   	        }
+        },
+        tableResponseChanged : function(newvalue, oldvalue){
+            this.tables = [];
+            if(newvalue != null){
+  	             this.async(function() {
+  	         		this.tables =  this.tables.concat(newvalue.tables);
+  	   		 	          }, 500);
+            }
+           	
+           }
+      });
+    })();
+  </script>
+</dom-module>

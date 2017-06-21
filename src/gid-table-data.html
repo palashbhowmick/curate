@@ -1,0 +1,64 @@
+<!--
+  Wrapper component for table data
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="gid-api.html">
+
+<dom-module id="gid-table-data">
+  <template>
+        <!--  table data -->
+		<gid-api auto=false
+			http-method="get" api-url={{tabledataUrl}} response='{{tabledataResponse}}'
+			api-timeout={{tabledataTimeout}} api-params={{tabledataParams}}> </gid-api>
+		<!--  table data -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-table-data',
+        properties:{
+	        	tabledataUrl:{
+	            	type: String,
+	      	        notify: true
+	      	  },
+	     	  tabledataTimeout : {
+	    	   		type: Number,
+	    	        notify: true,
+	    	        value : 0
+	          },
+	      	  tabledataResponse : {
+	    	 		type : Object,
+	    	 		notify : true,
+	    	 		observer : 'tableDataResponseChanged'
+	      	  },
+	      	  tabledataParams : {
+	    	  		  type: String,
+	    	  		  notify : true
+	      	  },
+	      	tableData: {
+	   	          type: Array,
+	   	          value: [],
+	   	          notify: true
+	   	        },
+	   	     tableColumns: {
+	             type: Array,
+	             value: [],
+	             notify: true
+	           },
+        },
+        tableDataResponseChanged : function(newvalue, oldvalue){
+          this.tableColumns = [];
+      	  this.tableData = [];
+      	  if(newvalue != null){
+      		  this.async(function() {
+      	       		this.tableColumns =  this.tableColumns.concat(newvalue.columns);
+      	       		this.tableData = this.tableData.concat(newvalue.rows);
+      	 		 	          }, 500);
+           }
+        }
+      });
+    })();
+  </script>
+</dom-module>

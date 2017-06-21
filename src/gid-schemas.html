@@ -1,0 +1,58 @@
+<!--
+  Wrapper component for schemas
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="gid-api.html">
+
+<dom-module id="gid-schemas">
+  <template>
+         <!-- schemas  -->
+	    <gid-api auto=false
+			http-method="get" api-url={{schemaUrl}} response='{{schemaResponse}}'
+			api-timeout={{schemaTimeout}} api-params={{schemaParams}}> </gid-api>
+		<!-- schemas  -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-schemas',
+        properties:{
+	        	schemaUrl:{
+	            	type: String,
+	      	        notify: true
+	      	   },
+	     	   schemaTimeout : {
+	    	   		type: Number,
+	    	        notify: true,
+	    	        value : 0
+	           },
+	      	   schemaResponse : {
+	    	 		type : Object,
+	    	 		notify : true,
+	    	 		observer : 'schemaResponseChanged'
+	      	   },
+	      	   schemaParams : {
+	      		  type: String,
+	      		  notify : true
+	      	   },
+	      	  schemas: {
+	   	          type: Array,
+	   	          value: [],
+	   	          notify: true
+	   	        }
+        },
+        schemaResponseChanged : function(newvalue, oldvalue){
+            this.schemas = [];
+            if(newvalue != null){
+  	             this.async(function() {
+  	         		this.schemas =  this.schemas.concat(newvalue.schemas);
+  	   		 	          }, 500);
+            }
+           	
+           }
+      });
+    })();
+  </script>
+</dom-module>

@@ -1,0 +1,77 @@
+<!--
+  Wrapper component for concept coverage data
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="gid-api.html">
+
+<dom-module id="gid-conceptcoverage-data">
+  <template>
+        <!-- concept coverage data -->	
+		<gid-api auto=false
+			http-method="get" api-url={{lobsUrl}} response='{{lobsResponse}}'
+			api-timeout={{lobsTimeout}} api-params={{lobsParams}}> </gid-api>			
+	    <!-- concept coverage data -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-conceptcoverage-data',
+        properties:{
+	        	lobsUrl:{
+	                type: String,
+	          	    notify: true
+	       	 	},
+	       	 	lobsTimeout : {
+	           		type: Number,
+	       	        notify: true,
+	       	        value : 0
+	       	    },
+	       	 	lobsResponse : {
+	        		type : Object,
+	        		notify : true,
+	        		observer : 'lobsResponseChanged'
+	        	},
+	          	lobsParams : {
+	        		 type: String,
+	        		 notify : true
+	        	},
+	        	lobs: {
+	                type: Array,
+	                value: [],
+	                notify: true,
+	   	        },
+	   	       coverage: {
+	             type: Number,
+	             value: 0,
+	             notify: true
+	           },
+
+	           eta: {
+	             type: Number,
+	             value: 0,
+	             notify: true
+	           },
+
+	           confirmedColumns: {
+	             type: Number,
+	             value: 0,
+	             notify: true
+	           }
+        },
+        lobsResponseChanged: function(newvalue, oldvalue){
+    	    if(newvalue != null){
+    		  this.async(function() {
+    			  this.coverage = newvalue.coverage;
+    			  this.eta = newvalue.eta;
+    			  this.confirmedColumns = newvalue.confirmedColumns;
+    			  this.set('lobs', newvalue.lobs.map(function (e) { return e.toUpperCase() }));
+    	 		 	          }, 500);
+    		  
+    	  }
+      },
+      });
+    })();
+  </script>
+</dom-module>

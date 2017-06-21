@@ -1,0 +1,58 @@
+<!--
+  Wrapper component for databases
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="gid-api.html">
+
+<dom-module id="gid-databases">
+  <template>
+         <!-- databases -->	
+		<gid-api auto=false
+			http-method="get" api-url={{databaseUrl}} response='{{databaseResponse}}'
+			api-timeout={{databaseTimeout}} api-params={{databaseParams}}> </gid-api>			
+	    <!-- databases -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-databases',
+        properties:{
+	        	databaseUrl:{
+	                type: String,
+	      	        notify: true
+	      	 	},
+	      	 	databaseTimeout : {
+	          		type: Number,
+	      	        notify: true,
+	      	        value : 0
+	      	   },
+	      	   databaseResponse : {
+	    	 		type : Object,
+	    	 		notify : true,
+	    	 		observer : 'databaseResponseChanged'
+	      	   },
+	      	   databaseParams : {
+	      		  type: String,
+	      		  notify : true
+	      	   },
+	   	   	   databases: {
+	   	          type: Array,
+	   	          value: [],
+	   	          notify: true
+	   	        }
+        },
+        databaseResponseChanged : function(newvalue, oldvalue){
+            this.databases = [];
+            if(newvalue != null){
+  	             this.async(function() {
+  	         		this.databases =  this.databases.concat(newvalue.databases);
+  	   		 	          }, 500);
+            }
+           	
+           }
+      });
+    })();
+  </script>
+</dom-module>

@@ -1,0 +1,58 @@
+<!--
+  Wrapper component for applications
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="gid-api.html">
+
+<dom-module id="gid-applications">
+  <template>
+         <!-- applications -->	
+		<gid-api auto=false
+			http-method="get" api-url={{applicationUrl}} response='{{applicationResponse}}'
+			api-timeout={{applicationTimeout}} api-params={{applicationParams}}> </gid-api>			
+	    <!-- applications -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-applications',
+        properties:{
+        	applicationUrl:{
+                type: String,
+      	        notify: true
+      	 	},
+      	 	applicationTimeout : {
+          		type: Number,
+      	        notify: true,
+      	        value : 0
+      	    },
+      	    applicationResponse : {
+    	 		type : Object,
+    	 		notify : true,
+    	 		observer : 'applicationResponseChanged'
+      	  	},
+      		applicationParams : {
+      		    type: String,
+      		    notify : true
+      	  	},
+      	    applications: {
+              type: Array,
+              value: [],
+              notify: true
+            }    
+        },
+        applicationResponseChanged : function(newvalue, oldvalue){
+          this.applications = [];
+      	  if(newvalue != null){
+      		  this.async(function() {
+      	       		this.applications =  this.applications.concat(newvalue.applications);
+      	 		 	          }, 500);
+           	
+           }
+        }
+      });
+    })();
+  </script>
+</dom-module>

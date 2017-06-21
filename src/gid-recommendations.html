@@ -1,0 +1,57 @@
+<!--
+  Wrapper component for recommendations
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="gid-api.html">
+
+<dom-module id="gid-recommendations">
+  <template>
+         <!--  recommendation -->
+		<gid-api auto=false
+			http-method="get" api-url={{recommendationUrl}} response='{{recommendationResponse}}'
+			api-timeout={{recommendationTimeout}} api-params={{recommendationParams}}> </gid-api>
+		<!--  recommendation -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-recommendations',
+        properties:{
+	          recommendationUrl:{
+	             	type: String,
+	       	        notify: true
+	       	  },
+	     	  recommendationTimeout : {
+	         		type: Number,
+	     	        notify: true,
+	     	        value : 0
+	     	  },
+	       	  recommendationResponse : {
+	     	 		type : Object,
+	     	 		notify : true,
+	     	 		observer : 'recommendationResponseChanged'
+	       	  },
+	       	  recommendationParams : {
+	     	  		  type: String,
+	     	  		  notify : true
+	       	  },
+	       	 recommendedConcepts: {
+	   	          type: Array,
+	   	          value: [],
+	   	          notify: true
+	   	        }
+        },
+        recommendationResponseChanged: function(newvalue, oldvalue){
+      	  this.recommendedConcepts = [];
+      	  if(newvalue != null){
+      		  this.async(function() {
+      	       	  this.recommendedConcepts = this.recommendedConcepts.concat(newvalue.recommendations);
+      	 		 	          }, 500);
+      	  }
+        }
+      });
+    })();
+  </script>
+</dom-module>

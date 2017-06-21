@@ -24,7 +24,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/mdb-coverage-table/mdb-coverage-table.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="gid-api.html">
+<link rel="import" href="gid-concepts.html">
+<link rel="import" href="gid-applications.html">
+<link rel="import" href="gid-databases.html">
+<link rel="import" href="gid-schemas.html">
+<link rel="import" href="gid-tables.html">
+<link rel="import" href="gid-table-data.html">
+<link rel="import" href="gid-recommendations.html">
+<link rel="import" href="gid-conceptcoverage-data.html">
 
 <dom-module id="concept-coverage">
   <template>
@@ -446,52 +453,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	
 	<!--  rest api handling -->
 	
-		<!-- lobs -->	
-		<gid-api auto=false
-			http-method="get" api-url={{lobsUrl}} response='{{lobsResponse}}'
-			api-timeout={{lobsTimeout}} api-params={{lobsParams}}> </gid-api>			
-	    <!-- lobs -->
+		<!-- concept coverage data -->	
+		<gid-conceptcoverage-data lobs-url={{lobsUrl}} lobs={{lobs}} eta={{eta}} coverage={{coverage}} confirmed-columns={{confirmedColumns}}
+			lobs-timeout={{lobsTimeout}} lobs-params={{lobsParams}}> </gid-conceptcoverage-data>			
+	    <!-- concept coverage data -->
 	
-	   <!-- domains -->	
-		<gid-api auto=false
-			http-method="get" api-url={{domainUrl}} response='{{domainResponse}}'
-			api-timeout={{domainTimeout}} api-params={{domainParams}}> </gid-api>			
+	    
+	    <!-- domains -->	
+		<gid-concepts domain-url={{domainUrl}} concepts={{concepts}}
+			domain-timeout={{domainTimeout}} domain-params={{domainParams}}> </gid-concepts>			
 	    <!-- domains -->
 	    
+	    
 	    <!-- applications -->	    
-	    <gid-api auto=false
-			http-method="get" api-url={{applicationUrl}} response='{{applicationResponse}}'
-			api-timeout={{applicationTimeout}} api-params={{applicationParams}}> </gid-api>
+	    <gid-applications application-url={{applicationUrl}} applications={{applications}}
+			application-timeout={{applicationTimeout}} application-params={{applicationParams}}> </gid-applications>
 	    <!-- applications -->
 	    
-	    <!--  databases -->
-	    <gid-api auto=false
-			http-method="get" api-url={{databaseUrl}} response='{{databaseResponse}}'
-			api-timeout={{databaseTimeout}} api-params={{databaseParams}}> </gid-api>
+       
+        <!--  databases -->
+	    <gid-databases database-url={{databaseUrl}} databases={{databases}}
+			database-timeout={{databaseTimeout}} database-params={{databaseParams}}> </gid-databases>
 	    <!--  databases -->
 	    
-	    <!-- schemas  -->
-	    <gid-api auto=false
-			http-method="get" api-url={{schemaUrl}} response='{{schemaResponse}}'
-			api-timeout={{schemaTimeout}} api-params={{schemaParams}}> </gid-api>
+
+		<!-- schemas  -->
+	    <gid-schemas schema-url={{schemaUrl}} schemas={{schemas}}
+			schema-timeout={{schemaTimeout}} schema-params={{schemaParams}}> </gid-schemas>
 		<!-- schemas  -->
 		
 		<!-- tables  -->
-	    <gid-api auto=false
-			http-method="get" api-url={{tableUrl}} response='{{tableResponse}}'
-			api-timeout={{tableTimeout}} api-params={{tableParams}}> </gid-api>
+	    <gid-tables table-url={{tableUrl}} tables={{tables}}
+			table-timeout={{tableTimeout}} table-params={{tableParams}}> </gid-tables>
 		<!-- tables  -->
 		
 		<!--  table data -->
-		<gid-api auto=false
-			http-method="get" api-url={{tableDataUrl}} response='{{tableDataResponse}}'
-			api-timeout={{tableDataTimeout}} api-params={{tableDataParams}}> </gid-api>
+		<gid-table-data tabledata-url={{tableDataUrl}} table-data={{tableData}} table-columns={{tableColumns}}
+			tabledata-timeout={{tableDataTimeout}} tabledata-params={{tableDataParams}}> </gid-table-data>
 		<!--  table data -->
 		
 		<!--  recommendation -->
-		<gid-api auto=false
-			http-method="get" api-url={{recommendationUrl}} response='{{recommendationResponse}}'
-			api-timeout={{recommendationTimeout}} api-params={{recommendationParams}}> </gid-api>
+		<gid-recommendations  recommendation-url={{recommendationUrl}} recommended-concepts={{recommendedConcepts}}
+			recommendation-timeout={{recommendationTimeout}} recommendation-params={{recommendationParams}}> </gid-recommendations>
 		<!--  recommendation -->
 		
 	<!--  rest api handling -->
@@ -686,12 +689,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         lobs: {
           type: Array,
-          value: []
+          value: [],
+          notify: true,
+          observer: 'lobsArrChanged'
         },
 
         concepts: {
           type: Array,
-          value: []
+          value: [],
+          notify: true,
+          observer : 'conceptArrChanged'
         },
 
         selectedConcept: {
@@ -711,7 +718,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         applications: {
           type: Array,
           value: [],
-          notify: true
+          notify: true,
+          observer: 'applicationArrChanged'
         },
 
         selectedApplication: {
@@ -724,7 +732,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         databases: {
           type: Array,
           value: [],
-          notify: true
+          notify: true,
+          observer: 'databaseArrChanged'
         },
 
         selectedDatabase: {
@@ -737,7 +746,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         schemas: {
           type: Array,
           value: [],
-          notify: true
+          notify: true,
+          observer: 'schemaArrChanged'
         },
 
         selectedSchema: {
@@ -750,7 +760,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tables: {
           type: Array,
           value: [],
-          notify: true
+          notify: true,
+          observer: 'tableArrChanged'
         },
 
         selectedTable: {
@@ -769,7 +780,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tableData: {
           type: Array,
           value: [],
-          notify: true
+          notify: true,
+          observer: 'tabledataArrChanged'
         },
 
         selectedColumn: {
@@ -782,7 +794,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         recommendedConcepts: {
           type: Array,
           value: [],
-          notify: true
+          notify: true,
+          observer: 'recommendationArrChanged'
         },
 
         isConceptIdentified: {
@@ -799,11 +812,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    	        notify: true,
    	        value : 0
    	    },
-   	 	lobsResponse : {
-    		type : Object,
-    		notify : true,
-    		observer : 'lobsResponseChanged'
-    	},
+//    	 	lobsResponse : {
+//     		type : Object,
+//     		notify : true,
+//     		observer : 'lobsResponseChanged'
+//     	},
       	lobsParams : {
     		 type: String,
     		 notify : true
@@ -817,11 +830,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    	        notify: true,
    	        value : 0
    	    },
-   	    domainResponse : {
-	  		type : Object,
-	  		notify : true,
-	  		observer : 'domainResponseChanged'
-   	  	},
+//    	    domainResponse : {
+// 	  		type : Object,
+// 	  		notify : true,
+// 	  		observer : 'domainResponseChanged'
+//    	  	},
    	    domainParams : {
 	   		type: String,
 	   		notify : true
@@ -835,11 +848,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   	        notify: true,
   	        value : 0
   	    },
-  	    applicationResponse : {
-	 		type : Object,
-	 		notify : true,
-	 		observer : 'applicationResponseChanged'
-  	  	},
+//   	    applicationResponse : {
+// 	 		type : Object,
+// 	 		notify : true,
+// 	 		observer : 'applicationResponseChanged'
+//   	  	},
   		applicationParams : {
   		    type: String,
   		    notify : true
@@ -853,11 +866,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   	        notify: true,
   	        value : 0
   	   },
-  	   databaseResponse : {
-	 		type : Object,
-	 		notify : true,
-	 		observer : 'databaseResponseChanged'
-  	   },
+//   	   databaseResponse : {
+// 	 		type : Object,
+// 	 		notify : true,
+// 	 		observer : 'databaseResponseChanged'
+//   	   },
   	   databaseParams : {
   		  type: String,
   		  notify : true
@@ -871,11 +884,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        notify: true,
 	        value : 0
        },
-  	   schemaResponse : {
-	 		type : Object,
-	 		notify : true,
-	 		observer : 'schemaResponseChanged'
-  	   },
+//   	   schemaResponse : {
+// 	 		type : Object,
+// 	 		notify : true,
+// 	 		observer : 'schemaResponseChanged'
+//   	   },
   	   schemaParams : {
   		  type: String,
   		  notify : true
@@ -889,11 +902,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        notify: true,
 	        value : 0
        },
-  	   tableResponse : {
-	 		type : Object,
-	 		notify : true,
-	 		observer : 'tableResponseChanged'
-  	   },
+//   	   tableResponse : {
+// 	 		type : Object,
+// 	 		notify : true,
+// 	 		observer : 'tableResponseChanged'
+//   	   },
   	   tableParams : {
   		  type: String,
   		  notify : true
@@ -907,11 +920,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        notify: true,
 	        value : 0
       },
-  	  tableDataResponse : {
-	 		type : Object,
-	 		notify : true,
-	 		observer : 'tableDataResponseChanged'
-  	  },
+//   	  tableDataResponse : {
+// 	 		type : Object,
+// 	 		notify : true,
+// 	 		observer : 'tableDataResponseChanged'
+//   	  },
   	  tableDataParams : {
 	  		  type: String,
 	  		  notify : true
@@ -925,11 +938,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        notify: true,
 	        value : 0
 	  },
-  	  recommendationResponse : {
-	 		type : Object,
-	 		notify : true,
-	 		observer : 'recommendationResponseChanged'
-  	  },
+//   	  recommendationResponse : {
+// 	 		type : Object,
+// 	 		notify : true,
+// 	 		observer : 'recommendationResponseChanged'
+//   	  },
   	  recommendationParams : {
 	  		  type: String,
 	  		  notify : true
@@ -937,17 +950,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       identifiedConcept: String,
       coverage: {
           type: Number,
-          value: 0
+          value: 0,
+          notify: true
         },
 
         eta: {
           type: Number,
-          value: 0
+          value: 0,
+          notify: true
         },
 
         confirmedColumns: {
           type: Number,
-          value: 0
+          value: 0,
+          notify: true
         },
 
         loadingInProgress: {
@@ -994,17 +1010,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             if (updatedConcept) updatedConcept.recommendationFactor = e.detail.recommendationFactor;
         });
       },
-      lobsResponseChanged: function(newvalue, oldvalue){
-    	    if(newvalue != null){
-    		  this.async(function() {
-    			  this.coverage = newvalue.coverage;
-    			  this.eta = newvalue.eta;
-    			  this.confirmedColumns = newvalue.confirmedColumns;
-    			  this.set('lobs', newvalue.lobs.map(function (e) { return e.toUpperCase() }));
-    			  this._setSelectedLob();
-    	 		 	          }, 500);
+//       lobsResponseChanged: function(newvalue, oldvalue){
+//     	    if(newvalue != null){
+//     		  this.async(function() {
+//     			  this.coverage = newvalue.coverage;
+//     			  this.eta = newvalue.eta;
+//     			  this.confirmedColumns = newvalue.confirmedColumns;
+//     			  this.set('lobs', newvalue.lobs.map(function (e) { return e.toUpperCase() }));
+//     			  this._setSelectedLob();
+//     	 		 	          }, 500);
     		  
-    	  }
+//     	  }
+//       },
+      lobsArrChanged: function () {
+    	if(this.lobs.length){
+    		this._setSelectedLob();
+    	}  
       },
       _setSelectedLob: function () {
         if (this.lobs) {
@@ -1042,12 +1063,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.domainTimeout = this.domainTimeout - 1;
         }
       },
-      domainResponseChanged : function(newvalue, oldvalue){
-          this.concepts = [];
-          if(newvalue != null){
+//       domainResponseChanged : function(newvalue, oldvalue){
+//           this.concepts = [];
+//           if(newvalue != null){
+// 	          var row_height = 30;
+// 	          var max_item_count = 24,
+// 	            extra_rows = newvalue.domains.length - max_item_count > 0 ? Math.ceil((newvalue.domains.length - max_item_count) / 4) : 0,
+// 	            list = this.querySelector('mdb-simple-list.concept-list');
+// 	          if (extra_rows > 0) {
+// 	            list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
+// 	          } else {
+// 	            delete list.customStyle['--concept-list-height'];
+// 	          }
+// 	          list.updateStyles();
+// 	             this.async(function() {
+// 	         		this.concepts =  this.concepts.concat(newvalue.domains);
+// 	   		 	          }, 500);
+// 	             list.emptyMessage = !this.concepts.length ? 'No concepts found for selected LOB.' : '';
+// 	             list.updateStyles();
+//           }
+         	
+//          },
+      conceptArrChanged: function () {
+    	  if(this.concepts.length){
 	          var row_height = 30;
 	          var max_item_count = 24,
-	            extra_rows = newvalue.domains.length - max_item_count > 0 ? Math.ceil((newvalue.domains.length - max_item_count) / 4) : 0,
+	            extra_rows = this.concepts.length - max_item_count > 0 ? Math.ceil((this.concepts.length - max_item_count) / 4) : 0,
 	            list = this.querySelector('mdb-simple-list.concept-list');
 	          if (extra_rows > 0) {
 	            list.customStyle['--concept-list-height'] = (180 + (extra_rows * row_height)) + 'px';
@@ -1055,14 +1096,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	            delete list.customStyle['--concept-list-height'];
 	          }
 	          list.updateStyles();
-	             this.async(function() {
-	         		this.concepts =  this.concepts.concat(newvalue.domains);
-	   		 	          }, 500);
 	             list.emptyMessage = !this.concepts.length ? 'No concepts found for selected LOB.' : '';
 	             list.updateStyles();
-          }
-         	
-         },
+    	  }
+    	  
+    	  
+      },
       _conceptChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.applications');
         this.set('applications', []);
@@ -1073,17 +1112,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
       
-      applicationResponseChanged: function(newvalue, oldvalue){
-    	  this.applications = [];
-    	  if(newvalue != null){
-    		  this.async(function() {
-    	       		this.applications =  this.applications.concat(newvalue.applications);
-    	 		 	          }, 500);
-    	    	  this.querySelector('mdb-dimension-finder.applications').emptyMessage = this.applications.length === 0 ? 'No applications found for the selected concept.' : '';
+//       applicationResponseChanged: function(newvalue, oldvalue){
+//     	  this.applications = [];
+//     	  if(newvalue != null){
+//     		  this.async(function() {
+//     	       		this.applications =  this.applications.concat(newvalue.applications);
+//     	 		 	          }, 500);
+//     	    	  this.querySelector('mdb-dimension-finder.applications').emptyMessage = this.applications.length === 0 ? 'No applications found for the selected concept.' : '';
+//     	  }
+    	  
+//       },
+      applicationArrChanged: function () {
+    	  if(this.applications.length){
+    		  this.querySelector('mdb-dimension-finder.applications').emptyMessage = this.applications.length === 0 ? 'No applications found for the selected concept.' : '';
     	  }
     	  
+    	  
       },
-
       _applicationChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.databases');
         this.set('databases', []);
@@ -1094,15 +1139,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.databaseTimeout = this.databaseTimeout - 1;
         }
       },
-      databaseResponseChanged: function(newvalue, oldvalue){
-    	  this.databases = [];
-    	  if(newvalue != null){
-    		  this.async(function() {
-    	       		this.databases =  this.databases.concat(newvalue.databases);
-    	 		 	          }, 500);
-    	    	  this.querySelector('mdb-dimension-finder.databases').emptyMessage = this.databases.length === 0 ? 'No databases found for the selected application.' : '';
-    	  }
-      },
+//       databaseResponseChanged: function(newvalue, oldvalue){
+//     	  this.databases = [];
+//     	  if(newvalue != null){
+//     		  this.async(function() {
+//     	       		this.databases =  this.databases.concat(newvalue.databases);
+//     	 		 	          }, 500);
+//     	    	  this.querySelector('mdb-dimension-finder.databases').emptyMessage = this.databases.length === 0 ? 'No databases found for the selected application.' : '';
+//     	  }
+//       },
+	  databaseArrChanged: function () {
+		  if(this.databases.length){
+		  	this.querySelector('mdb-dimension-finder.databases').emptyMessage = this.databases.length === 0 ? 'No databases found for the selected application.' : '';
+		  }
+	  },
       _databaseChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.schemas');
         this.set('schemas', []);
@@ -1113,15 +1163,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.schemaTimeout = this.schemaTimeout - 1;
         }
       },
-      schemaResponseChanged: function(newvalue, oldvalue){
-    	  this.schemas = [];
-    	  if(newvalue != null){
-    		  this.async(function() {
-    	       		this.schemas =  this.schemas.concat(newvalue.schemas);
-    	 		 	          }, 500);
-    		  this.querySelector('mdb-dimension-finder.schemas').emptyMessage = this.schemas.length === 0 ? 'No schemas found for the selected database.' : '';
-    	  }
-      },
+//       schemaResponseChanged: function(newvalue, oldvalue){
+//     	  this.schemas = [];
+//     	  if(newvalue != null){
+//     		  this.async(function() {
+//     	       		this.schemas =  this.schemas.concat(newvalue.schemas);
+//     	 		 	          }, 500);
+//     		  this.querySelector('mdb-dimension-finder.schemas').emptyMessage = this.schemas.length === 0 ? 'No schemas found for the selected database.' : '';
+//     	  }
+//       },
+	  schemaArrChanged: function(){
+		  if(this.schemas.length){
+		  	this.querySelector('mdb-dimension-finder.schemas').emptyMessage = this.schemas.length === 0 ? 'No schemas found for the selected database.' : '';
+		  }
+	  },
       _schemaChanged: function () {
         this._resetEmptyMessage('mdb-dimension-finder.tables');
         this.set('tables', []);
@@ -1132,14 +1187,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.tableTimeout = this.tableTimeout - 1;
         }
       },
-      tableResponseChanged: function(newvalue, oldvalue){
-    	  this.tables = [];
-    	  if(newvalue != null){
-    		  this.async(function() {
-    	       		this.tables =  this.tables.concat(newvalue.tables);
-    	 		 	          }, 500);
-    		  this.querySelector('mdb-dimension-finder.tables').emptyMessage = this.tables.length === 0 ? 'No tables found for the selected schema.' : '';
-    	  }
+//       tableResponseChanged: function(newvalue, oldvalue){
+//     	  this.tables = [];
+//     	  if(newvalue != null){
+//     		  this.async(function() {
+//     	       		this.tables =  this.tables.concat(newvalue.tables);
+//     	 		 	          }, 500);
+//     		  this.querySelector('mdb-dimension-finder.tables').emptyMessage = this.tables.length === 0 ? 'No tables found for the selected schema.' : '';
+//     	  }
+//       },
+	  tableArrChanged: function(){
+		  if(this.schemas.length){
+			  this.querySelector('mdb-dimension-finder.tables').emptyMessage = this.tables.length === 0 ? 'No tables found for the selected schema.' : '';
+		  }
       },
       _tableChanged: function () {
         this.set('tableColumns', []);
@@ -1153,15 +1213,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      	this.tableDataTimeout = this.tableDataTimeout - 1;
         }
       },
-      tableDataResponseChanged: function(newvalue, oldvalue){
-    	  this.tableColumns = [];
-    	  this.tableData = [];
-    	  if(newvalue != null){
-    		  this.async(function() {
-    	       		this.tableColumns =  this.tableColumns.concat(newvalue.columns);
-    	       		this.tableData = this.tableData.concat(newvalue.rows);
-    	 		 	          }, 500);
-    		  this.selectedColumn = newvalue.columns[0].name;
+//       tableDataResponseChanged: function(newvalue, oldvalue){
+//     	  this.tableColumns = [];
+//     	  this.tableData = [];
+//     	  if(newvalue != null){
+//     		  this.async(function() {
+//     	       		this.tableColumns =  this.tableColumns.concat(newvalue.columns);
+//     	       		this.tableData = this.tableData.concat(newvalue.rows);
+//     	 		 	          }, 500);
+//     		  this.selectedColumn = newvalue.columns[0].name;
+//     		  this.loadingInProgress = false;
+//     	  }
+//       },
+      tabledataArrChanged: function(){
+    	  if(this.tableData.length){
+    		  this.selectedColumn = this.tableColumns[0].name;
     		  this.loadingInProgress = false;
     	  }
       },
@@ -1176,17 +1242,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      	this.recommendationTimeout = this.recommendationTimeout - 1;
         }
       },
-      recommendationResponseChanged: function(newvalue, oldvalue){
-    	  this.recommendedConcepts = [];
-    	  if(newvalue != null){
-    		  this.async(function() {
-    			  var r = newvalue.recommendations[0];		
-                  var rf = r.recommendationFactor + 3;		
-                  //Initial values for selected concept recommendation		
-                  this.isSelectedConceptRecommended = 'maybe';		
-                  this.selectedConceptRecommendation = rf < 100 ? rf : 99;
-    	       	  this.recommendedConcepts = this.recommendedConcepts.concat(newvalue.recommendations);
-    	 		 	          }, 500);
+//       recommendationResponseChanged: function(newvalue, oldvalue){
+//     	  this.recommendedConcepts = [];
+//     	  if(newvalue != null){
+//     		  this.async(function() {
+//     			  var r = newvalue.recommendations[0];		
+//                   var rf = r.recommendationFactor + 3;		
+//                   //Initial values for selected concept recommendation		
+//                   this.isSelectedConceptRecommended = 'maybe';		
+//                   this.selectedConceptRecommendation = rf < 100 ? rf : 99;
+//     	       	  this.recommendedConcepts = this.recommendedConcepts.concat(newvalue.recommendations);
+//     	 		 	          }, 500);
+//     	  }
+//       },
+      recommendationArrChanged: function(){
+    	  if(this.recommendedConcepts.length){
+    		  var r = this.recommendedConcepts[0];		
+              var rf = r.recommendationFactor + 3;		
+              //Initial values for selected concept recommendation		
+              this.isSelectedConceptRecommended = 'maybe';		
+              this.selectedConceptRecommendation = rf < 100 ? rf : 99;
     	  }
       },
       _resetEmptyMessage: function (selector) {
