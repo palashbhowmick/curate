@@ -32,6 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="gid-table-data.html">
 <link rel="import" href="gid-recommendations.html">
 <link rel="import" href="gid-conceptcoverage-data.html">
+<link rel="import" href="gid-list-entities.html">
 
 <dom-module id="concept-coverage">
   <template>
@@ -148,7 +149,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: #fff;
       }
 
-       :host mdb-dimension-finder {
+       :host  mdb-dimension-finder {
         font-size: 1em;
         --mdb-title: {
           font-size: 1.5em;
@@ -184,7 +185,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         flex-wrap: nowrap;	
       }
 
-       :host .db-entities mdb-dimension-finder {
+       :host .db-entities   mdb-dimension-finder {
         font-size: 0.7rem;
         padding: 0 15px 0 15px;
         --mdb-dimension-finder-radio-button: {
@@ -213,7 +214,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 20px;
       }
 
-       :host[w-1024] .db-entities mdb-dimension-finder {
+       :host[w-1024] .db-entities  mdb-dimension-finder {
         padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
           padding-left: 10px;
@@ -227,7 +228,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 20px;
       }
 
-       :host[w-1280] .db-entities mdb-dimension-finder {
+       :host[w-1280] .db-entities  mdb-dimension-finder {
         padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
           padding-left: 12px;
@@ -241,7 +242,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 20px;
       }
 
-       :host[w-1360] .db-entities mdb-dimension-finder {
+       :host[w-1360] .db-entities  mdb-dimension-finder {
         padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
           padding-left: 18px;
@@ -255,7 +256,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 20px;
       }
 
-       :host[w-1366] .db-entities mdb-dimension-finder {
+       :host[w-1366] .db-entities  mdb-dimension-finder {
         padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
           padding-left: 17px;
@@ -269,7 +270,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 20px;
       }
 
-       :host[w-1440] .db-entities mdb-dimension-finder {
+       :host[w-1440] .db-entities  mdb-dimension-finder {
         padding: 0 10px 0 10px;
         --mdb-dimension-finder-radio-button: {
           padding-left: 7px;
@@ -283,7 +284,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 30px;
       }
 
-       :host[w-1600] .db-entities mdb-dimension-finder {
+       :host[w-1600] .db-entities  mdb-dimension-finder {
         margin-left: 30px;
         float: left;
         --mdb-dimension-finder-radio-button: {
@@ -298,7 +299,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 30px;
       }
 
-       :host[w-1680] .db-entities mdb-dimension-finder {
+       :host[w-1680] .db-entities  mdb-dimension-finder {
         margin-left: 30px;
         float: left;
         --mdb-dimension-finder-radio-button: {
@@ -313,7 +314,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 30px;
       }
 
-       :host[w-1920] .db-entities mdb-dimension-finder {
+       :host[w-1920] .db-entities  mdb-dimension-finder {
         --mdb-dimension-finder-radio-button: {
           padding-left: 34px;
           padding-right: 34px;
@@ -326,14 +327,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-top: 30px;
       }
 
-       :host[w-2560] .db-entities mdb-dimension-finder {
+       :host[w-2560] .db-entities  mdb-dimension-finder {
         --mdb-dimension-finder-radio-button: {
           padding-left: 74px;
           padding-right: 74px;
         }
       }
 
-       :host mdb-dimension-finder iron-icon {
+       :host  mdb-dimension-finder  iron-icon {
         width: 15px;
         height: 15px;
       }
@@ -466,7 +467,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	    
 	    
 	    <!-- applications -->	    
-	    <gid-applications application-url={{applicationUrl}} applications={{applications}}
+	    <gid-applications application-url={{applicationUrl}} applications={{applications}} empty-message = {{emptyMessage}}
 			application-timeout={{applicationTimeout}} application-params={{applicationParams}}> </gid-applications>
 	    <!-- applications -->
 	    
@@ -526,90 +527,97 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div class="db-entities">
             <!-- Applications -->
 
-            <mdb-dimension-finder class="applications" dimension="Application" items="{{applications}}" help-text="List of Applications"
-              selected-dimension="{{selectedApplication}}">
-              <template>
-                <paper-item>
-                  <span class="item-name" title="{{item.name}}">{{item.application}}</span>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
+<!--             <mdb-dimension-finder class="applications" dimension="Application" items="{{applications}}" help-text="List of Applications" -->
+<!--               selected-dimension="{{selectedApplication}}"> -->
+<!--               <template> -->
+<!--                 <paper-item> -->
+<!--                   <span class="item-name" title="{{item.application}}">{{item.application}}</span> -->
+<!--                   <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon> -->
+<!--                 </paper-item> -->
+<!--               </template> -->
+<!--             </mdb-dimension-finder> -->
 
-            <!-- Databases -->
+				<gid-list-entities class="applications"  entity="applications" dimension="Application" item-arr={{applications}}
+			help-text="List of Applications" selected-dimension="{{selectedApplication}}" title="application"> </gid-list-entities>
 
-            <mdb-dimension-finder class="databases" all-dimensions-allowed dimension="Database" items="{{databases}}" help-text="List of Databases"
-              selected-dimension="{{selectedDatabase}}">
-              <template>
-                <paper-item>
-                  <span class="bulb icon">
-                      <template is="dom-if" if="{{item.systemRecommended}}">
-                          <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon>
-                      </template>
-                  </span>
-                  <span class="face icon">
-                      <template is="dom-if" if="{{item.humanVerified}}">
-                          <iron-icon icon="icons:face"></iron-icon>
-                      </template>
-                  </span>
-                  <span class="item-name" title="{{item.connection}}">{{item.connection}}</span>
-                  <template is="dom-if" if="{{item.recommendation}}">
-                    <span class="recommendation">{{item.recommendation}}%</span>
-                  </template>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
+<!--             Databases -->
 
-            <!-- Schemas -->
-            <mdb-dimension-finder class="schemas" all-dimensions-allowed dimension="Schema" items="{{schemas}}" help-text="List of Schemas"
-              selected-dimension="{{selectedSchema}}">
-              <template>
-                <paper-item>
-                  <span class="bulb icon">
-                      <template is="dom-if" if="{{item.systemRecommended}}">
-                          <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon>
-                      </template>                            
-                  </span>
-                  <span class="face icon">
-                      <template is="dom-if" if="{{item.humanVerified}}">
-                          <iron-icon icon="icons:face"></iron-icon>
-                      </template>
-                  </span>
-                  <span class="item-name" title="{{item.schema}}">{{item.schema}}</span>
-                  <template is="dom-if" if="{{item.recommendation}}">
-                    <span class="recommendation">{{item.recommendation}}%</span>
-                  </template>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
+<!--             <mdb-dimension-finder class="databases" all-dimensions-allowed dimension="Database" items="{{databases}}" help-text="List of Databases" -->
+<!--               selected-dimension="{{selectedDatabase}}"> -->
+<!--               <template> -->
+<!--                 <paper-item> -->
+<!--                   <span class="bulb icon"> -->
+<!--                       <template is="dom-if" if="{{item.systemRecommended}}"> -->
+<!--                           <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon> -->
+<!--                       </template> -->
+<!--                   </span> -->
+<!--                   <span class="face icon"> -->
+<!--                       <template is="dom-if" if="{{item.humanVerified}}"> -->
+<!--                           <iron-icon icon="icons:face"></iron-icon> -->
+<!--                       </template> -->
+<!--                   </span> -->
+<!--                   <span class="item-name" title="{{item.connection}}">{{item.connection}}</span> -->
+<!--                   <template is="dom-if" if="{{item.recommendation}}"> -->
+<!--                     <span class="recommendation">{{item.recommendation}}%</span> -->
+<!--                   </template> -->
+<!--                   <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon> -->
+<!--                 </paper-item> -->
+<!--               </template> -->
+<!--             </mdb-dimension-finder> -->
+				<gid-list-entities class="databases" all-dimensions-allowed = true entity="databases" dimension="Database" item-arr={{databases}}
+			help-text="List of Databases" selected-dimension="{{selectedDatabase}}" title="databases"> </gid-list-entities>
+<!--             Schemas -->
+<!--             <mdb-dimension-finder class="schemas" all-dimensions-allowed dimension="Schema" items="{{schemas}}" help-text="List of Schemas" -->
+<!--               selected-dimension="{{selectedSchema}}"> -->
+<!--               <template> -->
+<!--                 <paper-item> -->
+<!--                   <span class="bulb icon"> -->
+<!--                       <template is="dom-if" if="{{item.systemRecommended}}"> -->
+<!--                           <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon> -->
+<!--                       </template>                             -->
+<!--                   </span> -->
+<!--                   <span class="face icon"> -->
+<!--                       <template is="dom-if" if="{{item.humanVerified}}"> -->
+<!--                           <iron-icon icon="icons:face"></iron-icon> -->
+<!--                       </template> -->
+<!--                   </span> -->
+<!--                   <span class="item-name" title="{{item.schema}}">{{item.schema}}</span> -->
+<!--                   <template is="dom-if" if="{{item.recommendation}}"> -->
+<!--                     <span class="recommendation">{{item.recommendation}}%</span> -->
+<!--                   </template> -->
+<!--                   <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon> -->
+<!--                 </paper-item> -->
+<!--               </template> -->
+<!--             </mdb-dimension-finder> -->
+				 <gid-list-entities class="schemas"  entity="schemas" dimension="Schema" item-arr={{schemas}}
+			help-text="List of Schemas" selected-dimension="{{selectedSchema}}" title="schemas"> </gid-list-entities>
 
-            <!-- Tables -->
+<!--             Tables -->
 
-            <mdb-dimension-finder class="tables" all-dimensions-allowed dimension="Table" items="{{tables}}" help-text="List of Tables"
-              selected-dimension="{{selectedTable}}">
-              <template>
-                <paper-item>
-                  <span class="bulb icon">
-                      <template is="dom-if" if="{{item.systemRecommended}}">
-                          <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon>
-                      </template>                            
-                  </span>
-                  <span class="face icon">
-                      <template is="dom-if" if="{{item.humanVerified}}">
-                          <iron-icon icon="icons:face"></iron-icon>
-                      </template>
-                  </span>
-                  <span class="item-name" title="{{item.table}}">{{item.table}}</span>
-                  <template is="dom-if" if="{{item.recommendation}}">
-                    <span class="recommendation">{{item.recommendation}}%</span>
-                  </template>
-                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
-                </paper-item>
-              </template>
-            </mdb-dimension-finder>
-
+<!--             <mdb-dimension-finder class="tables" all-dimensions-allowed dimension="Table" items="{{tables}}" help-text="List of Tables" -->
+<!--               selected-dimension="{{selectedTable}}"> -->
+<!--               <template> -->
+<!--                 <paper-item> -->
+<!--                   <span class="bulb icon"> -->
+<!--                       <template is="dom-if" if="{{item.systemRecommended}}"> -->
+<!--                           <iron-icon icon="icons:lightbulb-outline" item-icon></iron-icon> -->
+<!--                       </template>                             -->
+<!--                   </span> -->
+<!--                   <span class="face icon"> -->
+<!--                       <template is="dom-if" if="{{item.humanVerified}}"> -->
+<!--                           <iron-icon icon="icons:face"></iron-icon> -->
+<!--                       </template> -->
+<!--                   </span> -->
+<!--                   <span class="item-name" title="{{item.table}}">{{item.table}}</span> -->
+<!--                   <template is="dom-if" if="{{item.recommendation}}"> -->
+<!--                     <span class="recommendation">{{item.recommendation}}%</span> -->
+<!--                   </template> -->
+<!--                   <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon> -->
+<!--                 </paper-item> -->
+<!--               </template> -->
+<!--             </mdb-dimension-finder> -->
+				<gid-list-entities class="tables"  entity="tables" dimension="Table" item-arr={{tables}}
+			help-text="List of Tables" selected-dimension="{{selectedTable}}" title="tables"> </gid-list-entities>
           </div>
 
           <!-- Table data -->
@@ -969,7 +977,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         loadingInProgress: {
           type: Boolean,
           value: false
-        }
+        },
+        emptyMessage: {
+  		  type: String,
+  		  notify : true,
+  		  value : ''
+  	  	}
       },
 
       ready: function () {
@@ -1103,7 +1116,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     	  
       },
       _conceptChanged: function () {
-        this._resetEmptyMessage('mdb-dimension-finder.applications');
+//         this._resetEmptyMessage('mdb-dimension-finder.applications');
+		this._resetEmptyMessage('.db-entities gid-list-entities.applications mdb-dimension-finder');
         this.set('applications', []);
         if(this.selectedConcept){
         	//using mock json
@@ -1124,13 +1138,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 //       },
       applicationArrChanged: function () {
     	  if(this.applications.length){
-    		  this.querySelector('mdb-dimension-finder.applications').emptyMessage = this.applications.length === 0 ? 'No applications found for the selected concept.' : '';
+    		  this.querySelector('.db-entities gid-list-entities.applications mdb-dimension-finder').emptyMessage = this.emptyMessage;
     	  }
     	  
     	  
       },
       _applicationChanged: function () {
-        this._resetEmptyMessage('mdb-dimension-finder.databases');
+       // this._resetEmptyMessage('mdb-dimension-finder.databases');
+        this._resetEmptyMessage('.db-entities gid-list-entities.databases mdb-dimension-finder');
         this.set('databases', []);
 
         if (this.selectedApplication) {
@@ -1150,11 +1165,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 //       },
 	  databaseArrChanged: function () {
 		  if(this.databases.length){
-		  	this.querySelector('mdb-dimension-finder.databases').emptyMessage = this.databases.length === 0 ? 'No databases found for the selected application.' : '';
+// 		  	this.querySelector('mdb-dimension-finder.databases').emptyMessage = this.databases.length === 0 ? 'No databases found for the selected application.' : '';
+			  this.querySelector('.db-entities gid-list-entities.databases mdb-dimension-finder').emptyMessage = this.emptyMessage;
 		  }
 	  },
       _databaseChanged: function () {
-        this._resetEmptyMessage('mdb-dimension-finder.schemas');
+        this._resetEmptyMessage('.db-entities gid-list-entities.schemas mdb-dimension-finder');
         this.set('schemas', []);
 
         if (this.selectedDatabase) {
@@ -1174,11 +1190,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 //       },
 	  schemaArrChanged: function(){
 		  if(this.schemas.length){
-		  	this.querySelector('mdb-dimension-finder.schemas').emptyMessage = this.schemas.length === 0 ? 'No schemas found for the selected database.' : '';
+		  	this.querySelector('.db-entities gid-list-entities.schemas mdb-dimension-finder').emptyMessage = this.schemas.length === 0 ? 'No schemas found for the selected database.' : '';
 		  }
 	  },
       _schemaChanged: function () {
-        this._resetEmptyMessage('mdb-dimension-finder.tables');
+//         this._resetEmptyMessage('mdb-dimension-finder.tables');
+	    this._resetEmptyMessage('.db-entities gid-list-entities.tables mdb-dimension-finder');
         this.set('tables', []);
 
         if (this.selectedSchema) {
@@ -1198,7 +1215,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 //       },
 	  tableArrChanged: function(){
 		  if(this.schemas.length){
-			  this.querySelector('mdb-dimension-finder.tables').emptyMessage = this.tables.length === 0 ? 'No tables found for the selected schema.' : '';
+			  this.querySelector('.db-entities gid-list-entities.tables mdb-dimension-finder').emptyMessage = this.tables.length === 0 ? 'No tables found for the selected schema.' : '';
 		  }
       },
       _tableChanged: function () {

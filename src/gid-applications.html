@@ -41,7 +41,11 @@
               type: Array,
               value: [],
               notify: true
-            }    
+            },
+            emptyMessage: {
+            	 type: String,
+       		    notify : true
+            }
         },
         applicationResponseChanged : function(newvalue, oldvalue){
           this.applications = [];
@@ -49,6 +53,9 @@
       		  this.async(function() {
       	       		this.applications =  this.applications.concat(newvalue.applications);
       	 		 	          }, 500);
+      		if(!newvalue.applications){
+	       			this.emptyMessage = 'No applications found for the selected concept.';
+	       		}
            	
            }
         }

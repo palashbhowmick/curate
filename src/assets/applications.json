@@ -1,19 +1,15 @@
 {
 	"applications": [{
-			"application": "Advanced Information Services",
+			"name": "Advanced Information Services",
 			"id": "100680267"
 		},
 		{
-			"application": "GID_DW",
+			"name": "GID_DW",
 			"id": "100680315"
 		},
 		{
-			"application": "app@PRODUCT_HUB",
+			"name": "app@PRODUCT_HUB",
 			"id": "100680364"
-		},
-		{
-			"application": "GID_SALESDB",
-			"id": "103046168"
 		}
 	]
 }

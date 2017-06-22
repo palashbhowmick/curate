@@ -1,0 +1,145 @@
+<!--
+  Wrapper component for list entities
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="page-layout.html">
+<link rel="import" href="styling-elements/class-elements.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../bower_components/mdb-metric-display/mdb-metric-display.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/mdb-dimension-finder/mdb-dimension-finder.html">
+<link rel="import" href="../bower_components/mdb-simple-list/mdb-simple-list.html">
+<link rel="import" href="../bower_components/mdb-recommended-concepts/mdb-concept-recommendation.html">
+<link rel="import" href="../bower_components/mdb-recommended-concepts/mdb-recommended-concepts.html">
+<link rel="import" href="../bower_components/mdb-coverage-table/mdb-coverage-table.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="gid-list-entities">
+  <template>
+  <style include="class-elements iron-flex iron-flex-alignment"></style>
+    <style include="shared-styles">
+    /* Dimension finder */
+		:host {
+        display: block;
+        font-size: 11px;
+        height: 100%;
+        --standard-padding: 30px;
+        --mdb-recommended-concepts-property-name: {
+          color: #aaa;
+        }
+        /*--stat-value: {
+          font-size: 3em;
+          font-weight: lighter;
+        }
+        --stat-description: {
+          font-size: 1.5em;
+          font-weight: 100;
+          margin: 0;
+          color: #afafaf;
+        }*/
+      }
+       :host paper-item .icon {
+        display: inline-block;
+        width: 1.5em;
+      }
+
+       :host paper-item iron-icon.arrow {
+        display: none;
+      }
+
+       :host paper-item .recommendation {
+        display: inline-block;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+
+       :host paper-item[aria-selected="true"] iron-icon.arrow {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+        color: #fff;
+      }
+
+       :host mdb-dimension-finder {
+        font-size: 1em;
+        --mdb-title: {
+          font-size: 1.5em;
+          color: #adadad;
+        }
+        --mdb-dimension-finder-header-container: {
+          margin-bottom: 20px;
+        }
+        --mdb-dimension-finder-list: {
+          height: 168px;
+          overflow: auto;
+        }
+        --mdb-dimension-finder-list-item: {
+          min-height: 25px;
+          height: auto;
+          padding-top: 0;
+          padding-bottom: 0;
+          line-height: initial;
+          padding-left: 20px;
+        }
+      }
+    </style>
+         <!-- list entities -->	
+           <mdb-dimension-finder class="{{entity}}" dimension="{{dimension}}" items="{{itemArr}}" help-text="{{helpText}}"
+              selected-dimension="{{selectedDimension}}">
+              <template>
+                <paper-item>
+                  <span class="item-name" title="item.name">{{item.name}}</span>
+                  <iron-icon class="arrow" icon="icons:chevron-right"></iron-icon>
+                </paper-item>
+              </template>
+            </mdb-dimension-finder>			
+	    <!-- list entities -->
+
+  </template>
+  <script>
+    (function() {
+     'use strict';
+      Polymer({
+        is:'gid-list-entities',
+        properties:{
+        	   entity:{
+                    type: String,
+        	        notify: true
+        	 	},
+        	 	dimension : {
+            		type: String,
+        	        notify: true
+        	    },
+        	    title : {
+	     	  		type : String,
+	     	  		notify : true
+        	  	},
+        	    conceptId : {
+	     	   		type: String,
+	     	   		notify : true
+     	   	    },
+     	   	    helpText : {
+	     	   	    type: String,
+	     	   		notify : true
+     	   	    },
+     	   	    selectedDimension : {
+     	   	      type: String,
+     	          notify: true
+     	   	    },
+     	   	    itemArr : {
+     	   	    	type: Array,
+     	   	    	notify: true
+     	   	    }
+        }
+      });
+    })();
+  </script>
+</dom-module>

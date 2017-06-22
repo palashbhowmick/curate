@@ -1,6 +1,6 @@
 {
 	"schemas": [{
-		"schema": "ADV_INFO_SRVS",
+		"name": "ADV_INFO_SRVS",
 		"id": "100680368",
 		"systemRecommended": "true",
 		"recommendation" : 48

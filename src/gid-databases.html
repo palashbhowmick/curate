@@ -49,6 +49,9 @@
   	             this.async(function() {
   	         		this.databases =  this.databases.concat(newvalue.databases);
   	   		 	          }, 500);
+  	           if(!newvalue.databases){
+  	        	 this.querySelector('.db-entities gid-list-entities.databases mdb-dimension-finder').emptyMessage = this.emptyMessage;
+	       		}
             }
            	
            }
